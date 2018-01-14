@@ -1,10 +1,10 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/test.jsx',
+  entry: './src/index.jsx',
   output: {
     path: path.resolve(__dirname, 'public/build'),
-    filename: 'bundle.js',
+    filename: 'app.js',
   },
   module: {
     rules: [
@@ -14,5 +14,8 @@ module.exports = {
         exclude: /node_modules/,
       },
     ],
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
   },
 };
