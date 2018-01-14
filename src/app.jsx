@@ -1,16 +1,25 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Switch, Route, Redirect, NavLink } from 'react-router-dom';
+import { Switch, Route, NavLink } from 'react-router-dom';
+
+import './app.less';
 
 const Nav = () => (
   <nav>
-    <NavLink to="/" exact activeClassName="active">Root</NavLink>
-    <NavLink to="/other" exact activeClassName="active">Other</NavLink>
+    <ul>
+      <li><NavLink to="/" exact activeClassName="active">Root</NavLink></li>
+      <li><NavLink to="/other" exact activeClassName="active">Other</NavLink></li>
+    </ul>
   </nav>
 );
 
-const DefaultRoute = () => <span>This is the default route</span>;
-const SomeOtherRoute = () => <span>Some other route comes here</span>;
+const DefaultRoute = () => <div>This is the default route</div>;
+const SomeOtherRoute = () => (
+  <div>
+    Some other route comes here
+    <Route path="/other/node" component={() => <span>a hidden route!</span>} />
+  </div>
+);
+const NotFound = () => <div>This route does not exist</div>;
 
 const App = () => (
   <div>
@@ -20,7 +29,7 @@ const App = () => (
       <Switch>
         <Route path="/" exact component={DefaultRoute} />
         <Route path="/other" component={SomeOtherRoute} />
-        <Redirect to="/" />
+        <Route component={NotFound} />
       </Switch>
     </main>
   </div>
