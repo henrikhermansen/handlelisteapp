@@ -1,0 +1,10 @@
+{
+    "parser": "babel-eslint",
+    "extends": "sparing",
+    "env": {
+        "mocha": true
+    },
+    "rules": {
+        // Vi legger vel helst til nye regler i eslint-config-sparing, gjør vi ikke? :)
+    }
+}
