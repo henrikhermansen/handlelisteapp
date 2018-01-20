@@ -2,17 +2,11 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Navigation from './components/navigation/navigation';
+import NotFound from './components/not-found/not-found';
+import ShoppingList from './components/shopping-list';
+import * as paths from './constants/paths';
 
 import './app.less';
-
-const DefaultRoute = () => <div>This is the default route</div>;
-const SomeOtherRoute = () => (
-  <div>
-    Some other route comes here
-    <Route path="/other/node" component={() => <span>a hidden route!</span>} />
-  </div>
-);
-const NotFound = () => <div>This route does not exist</div>;
 
 const App = () => (
   <div>
@@ -20,8 +14,8 @@ const App = () => (
     <Navigation />
     <main>
       <Switch>
-        <Route path="/" exact component={DefaultRoute} />
-        <Route path="/other" component={SomeOtherRoute} />
+        <Route path={paths.root} exact component={() => <div />} />
+        <Route path={paths.shoppingList} component={ShoppingList} />
         <Route component={NotFound} />
       </Switch>
     </main>
