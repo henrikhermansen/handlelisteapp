@@ -9,10 +9,12 @@
   },
   "scripts": {
     "build": "webpack",
-    "heroku-postbuild": "npm run build",
-    "start": "npm run build && heroku local",
     "lint": "eslint src/**/*.js* *.js",
-    "lint:fix": "eslint src/**/*.js *.js --fix"
+    "lint:fix": "eslint src/**/*.js *.js --fix",
+    "heroku-postbuild": "npm run build",
+    "pre-commit": "lint",
+    "start": "npm run build && heroku local",
+    "test": ""
   },
   "repository": {
     "type": "git",
@@ -26,11 +28,6 @@
     "babel-preset-react": "^6.24.1",
     "babel-runtime": "^6.20.0",
     "css-loader": "^0.28.9",
-    "eslint": "^4.16.0",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.5.1",
     "express": "^4.16.2",
     "extract-text-webpack-plugin": "^3.0.2",
     "less": "^2.7.3",
@@ -43,5 +40,14 @@
     "redux": "^3.7.2",
     "style-loader": "^0.19.1",
     "webpack": "^3.10.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.16.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.5.1",
+    "pre-commit": "^1.2.2",
+    "webpack-dev-server": "^2.11.0"
   }
 }
