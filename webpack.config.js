@@ -1,13 +1,11 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const loaders = require('./webpack.loaders');
 
 module.exports = {
   entry: [
-    'webpack-dev-server/client?http://localhost:8080',
-    'webpack/hot/only-dev-server',
-    'react-hot-loader/babel',
-    'react-hot-loader/patch',
     './src/index.js',
   ],
   output: {
@@ -16,26 +14,7 @@ module.exports = {
     filename: 'app.js',
   },
   module: {
-    rules: [
-      {
-        test: /.jsx?$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-        options: {
-          cacheDirectory: true,
-          plugins: [
-            'react-hot-loader/babel',
-          ],
-        },
-      },
-      {
-        test: /\.less$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'less-loader'],
-        }),
-      },
-    ],
+    rules: loaders,
   },
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -45,13 +24,7 @@ module.exports = {
       filename: 'app.css',
       allChunks: true,
     }),
+    new CleanWebpackPlugin('public/build/*'),
     new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
   ],
-  devServer: {
-    contentBase: path.join(__dirname, 'public'),
-    hot: true,
-    historyApiFallback: true,
-  },
-  devtool: 'inline-source-map',
 };
