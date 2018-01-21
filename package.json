@@ -9,13 +9,15 @@
   },
   "scripts": {
     "build": "webpack",
-    "lint": "eslint src/**/*.js* *.js",
-    "lint:fix": "eslint src/**/*.js *.js --fix",
+    "lint": "eslint src/**/*.js* src/*.js *.js",
+    "lint:fix": "eslint src/**/*.js src/*.js *.js --fix",
     "heroku-postbuild": "npm run build",
-    "pre-commit": "lint",
-    "start": "npm run build && heroku local",
+    "start": "webpack-dev-server --progress",
     "test": ""
   },
+  "pre-commit": [
+    "lint:fix"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/henrikhermansen/handlelisteapp/"
@@ -35,6 +37,7 @@
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-hot-loader": "^3.1.3",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
