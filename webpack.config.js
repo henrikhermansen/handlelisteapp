@@ -6,6 +6,7 @@ const loaders = require('./webpack.loaders');
 
 module.exports = {
   entry: [
+    'babel-polyfill',
     './src/index.js',
   ],
   output: {

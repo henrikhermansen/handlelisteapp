@@ -10,8 +10,8 @@
   "scripts": {
     "build": "webpack --config webpack.config.prod.js",
     "build:dev": "webpack --config webpack.config.dev.js",
-    "lint": "eslint src/**/*.js* src/*.js *.js",
-    "lint:fix": "eslint src/**/*.js src/*.js *.js --fix",
+    "lint": "eslint 'src/**/*@(.js|.jsx)' *.js",
+    "lint:fix": "eslint 'src/**/*@(.js|.jsx)' *.js --fix",
     "heroku-postbuild": "npm run build",
     "start": "webpack-dev-server --progress --config webpack.config.dev.js",
     "test": ""
@@ -25,8 +25,10 @@
   },
   "dependencies": {
     "babel-core": "^6.24.1",
-    "babel-eslint": "^8.2.1",
     "babel-loader": "^7.0.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.5.1",
     "babel-preset-react": "^6.24.1",
     "babel-runtime": "^6.20.0",
@@ -43,12 +45,14 @@
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
+    "redux-saga": "^0.16.0",
     "style-loader": "^0.19.1",
     "uglifyjs-webpack-plugin": "^1.1.6",
     "webpack": "^3.10.0",
     "webpack-merge": "^4.1.1"
   },
   "devDependencies": {
+    "babel-eslint": "^8.2.1",
     "eslint": "^4.16.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.8.0",

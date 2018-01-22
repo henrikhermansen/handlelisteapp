@@ -1,22 +1,19 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
 import { AppContainer } from 'react-hot-loader';
 
-import App from './app';
-import rootReducer from './reducers';
-
-const store = createStore(rootReducer);
+import App from './components/app';
+import AppProvider from './app-provider';
+import createStore from './store-setup';
 
 const renderApp = Component => render(
   <BrowserRouter>
-    <Provider store={store}>
+    <AppProvider store={createStore()}>
       <AppContainer>
         <Component />
       </AppContainer>
-    </Provider>
+    </AppProvider>
   </BrowserRouter>
   , document.querySelector('#main'),
 );
@@ -25,7 +22,7 @@ renderApp(App);
 
 // Webpack Hot Module Replacement API
 if (module.hot) {
-  module.hot.accept('./app', () => {
+  module.hot.accept('./components/app', () => {
     render(App);
   });
 }

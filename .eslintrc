@@ -1,9 +1,12 @@
 {
+  "parser": "babel-eslint",
   "extends": "airbnb",
   "globals": {
-    "document": true
+    "document": true,
+    "window": true
   },
   "rules": {
+    "no-console": [2, { "allow": ["warn", "error"] }],
     "react/forbid-prop-types": 0,
     "react/jsx-filename-extension": 0
   }
