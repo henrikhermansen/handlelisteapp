@@ -2,18 +2,18 @@ import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { AppContainer } from 'react-hot-loader';
+import { Provider } from 'react-redux';
 
 import App from './components/app';
-import AppProvider from './app-provider';
 import createStore from './store-setup';
 
 const renderApp = Component => render(
   <BrowserRouter>
-    <AppProvider store={createStore()}>
+    <Provider store={createStore()}>
       <AppContainer>
         <Component />
       </AppContainer>
-    </AppProvider>
+    </Provider>
   </BrowserRouter>
   , document.querySelector('#main'),
 );
