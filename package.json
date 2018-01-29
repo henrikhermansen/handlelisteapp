@@ -1,7 +1,7 @@
 {
   "name": "handlelisteapp",
   "version": "0.0.1",
-  "license": "unlicensed",
+  "license": "WTFPL",
   "main": "public/index.html",
   "engines": {
     "node": "8.9.4",
