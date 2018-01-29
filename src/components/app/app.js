@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import Navigation from '../navigation/navigation';
 import NotFound from '../not-found/not-found';
-import ShoppingList from '../shopping-list/index';
+import ShoppingList from '../shopping-list';
 import * as paths from '../../constants/paths';
 
 import './app.less';
