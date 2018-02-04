@@ -5,13 +5,16 @@ import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 
 import App from './components/app';
+import ErrorBoundary from './components/error-boundary/error-boundary';
 import createStore from './store-setup';
 
 const renderApp = Component => render(
   <BrowserRouter>
     <Provider store={createStore()}>
       <AppContainer>
-        <Component />
+        <ErrorBoundary>
+          <Component />
+        </ErrorBoundary>
       </AppContainer>
     </Provider>
   </BrowserRouter>
