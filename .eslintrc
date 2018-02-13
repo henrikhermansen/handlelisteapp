@@ -1,10 +1,15 @@
 {
   "parser": "babel-eslint",
   "extends": "airbnb",
-  "globals": {
-    "document": true,
-    "window": true
-  },
+  "overrides": [
+    {
+      "files": [ "src/*.js" ],
+      "globals": {
+        "document": true,
+        "window": true
+      }
+    }
+  ],
   "rules": {
     "no-console": [2, { "allow": ["warn", "error"] }],
     "react/forbid-prop-types": 0,
