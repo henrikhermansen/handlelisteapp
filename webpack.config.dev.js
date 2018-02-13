@@ -26,6 +26,12 @@ const config = {
     contentBase: path.join(__dirname, 'public'),
     hot: true,
     historyApiFallback: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8081',
+        secure: false,
+      },
+    },
   },
   devtool: 'inline-source-map',
 };
