@@ -10,7 +10,7 @@ function* fetchBagItemsRequest() {
     const items = yield call(getBagItems);
     yield put(fetchBagItemsSuccess(items));
   } catch (e) {
-    console.error('fetchBagItemsError', e);
+    console.error(e);
     yield put(fetchBagItemsFailed(e));
   }
 }
