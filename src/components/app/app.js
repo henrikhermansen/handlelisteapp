@@ -34,7 +34,7 @@ class App extends Component {
           {
             initialization.isInitializing
               ? (
-                <span>Loading...</span>
+                <span>Initializing app...</span>
               )
               : (
                 <Switch>

@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 
 import initialization from './initialization';
-import shoppingList from './shopping-list';
+import bagItems from './bag-items';
 
 const rootReducer = combineReducers({
   initialization,
-  shoppingList,
+  bagItems,
 });
 
 export default rootReducer;
