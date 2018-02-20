@@ -8,6 +8,7 @@ import ShoppingList from '../shopping-list';
 import * as paths from '../../constants/paths';
 
 import './app.less';
+import IsLoadingWrapper from '../is-loading-wrapper/is-loading-wrapper';
 
 class App extends Component {
   static propTypes = {
@@ -27,25 +28,16 @@ class App extends Component {
   render() {
     const { initialization } = this.props;
     return (
-      <div>
-        <header>This is the app</header>
-        <Navigation />
+      <IsLoadingWrapper isLoading={initialization.isInitializing}>
         <main>
-          {
-            initialization.isInitializing
-              ? (
-                <span>Initializing app...</span>
-              )
-              : (
-                <Switch>
-                  <Route path={paths.root} exact component={() => <div />} />
-                  <Route path={paths.shoppingList} component={ShoppingList} />
-                  <Route component={NotFound} />
-                </Switch>
-              )
-          }
+          <Switch>
+            <Route path={paths.root} exact component={() => <div />} />
+            <Route path={paths.shoppingList} component={ShoppingList} />
+            <Route component={NotFound} />
+          </Switch>
         </main>
-      </div>
+        <Navigation />
+      </IsLoadingWrapper>
     );
   }
 }

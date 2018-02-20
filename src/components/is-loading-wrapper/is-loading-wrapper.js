@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Spinner from '../spinner/spinner';
+
 const IsLoadingWrapper = ({ isLoading, children }) => (
   isLoading
     ? (
-      <span>Data is loading...</span>
+      <Spinner large />
     )
     : children
 );

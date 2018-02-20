@@ -1,14 +1,17 @@
-import { delay } from 'redux-saga';
 import { put, takeEvery, call } from 'redux-saga/effects';
 
 import { getBagItems } from '../api/bag-items';
 import { FETCH_BAG_ITEMS, fetchBagItemsFailed, fetchBagItemsSuccess } from '../actions/bag-items';
 
+const mapJsonDateToJSDate = items => items.map(item => ({
+  ...item,
+  added: new Date(item.added),
+}));
+
 function* fetchBagItemsRequest() {
   try {
-    yield delay(1000);
     const items = yield call(getBagItems);
-    yield put(fetchBagItemsSuccess(items));
+    yield put(fetchBagItemsSuccess(mapJsonDateToJSDate(items)));
   } catch (e) {
     console.error(e);
     yield put(fetchBagItemsFailed(e));

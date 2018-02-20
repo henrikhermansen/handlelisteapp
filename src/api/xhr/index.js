@@ -7,7 +7,15 @@ const xhrPromise = (uri, options = {}) => new Promise((resolve, reject) => xhr(
     timeout: 5000,
     ...options,
   },
-  (error, response, body) => (error ? reject(error) : resolve(body)),
+  (error, response, body) => {
+    if (error) {
+      return reject(error);
+    }
+    if (response.statusCode >= 400) {
+      return reject(body);
+    }
+    return resolve(body);
+  },
 ));
 
 export default {

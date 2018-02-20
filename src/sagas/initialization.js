@@ -1,4 +1,3 @@
-import { delay } from 'redux-saga';
 import { put, takeEvery } from 'redux-saga/effects';
 
 import { INITIALIZE_REQUEST, initializeError, initializeSuccess } from '../actions/initialization';
@@ -8,7 +7,6 @@ import { fetchPurchasedItems } from '../actions/purchased-items';
 
 function* initializationRequest() {
   try {
-    yield delay(2000);
     yield put(fetchBagItems());
     yield put(fetchItems());
     yield put(fetchPurchasedItems());

@@ -5,13 +5,11 @@ import { NavLink } from 'react-router-dom';
 import './navigation-item.less';
 
 const NavigationItem = props => (
-  <li>
-    <NavLink
-      className="navigation-item"
-      activeClassName="navigation-item--active"
-      {...props}
-    />
-  </li>
+  <NavLink
+    className="navigation-item"
+    activeClassName="navigation-item--active"
+    {...props}
+  />
 );
 
 NavigationItem.defaultProps = {
