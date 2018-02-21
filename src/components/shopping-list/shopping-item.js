@@ -1,10 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ShoppingItem = ({ children }) => <li>{children}</li>;
+import './shopping-item.less';
+
+const ShoppingItem = ({ item }) => (
+  <div className="shopping-item">
+    <span>{item.name}</span>
+    <span>{item.id}</span>
+    <span>{item.id}</span>
+  </div>
+);
 
 ShoppingItem.propTypes = {
-  children: PropTypes.node.isRequired,
+  item: PropTypes.object.isRequired,
 };
 
 export default ShoppingItem;

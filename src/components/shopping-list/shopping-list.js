@@ -6,11 +6,11 @@ import IsLoadingWrapper from '../is-loading-wrapper/is-loading-wrapper';
 
 const ShoppingList = ({ isLoading, items }) => (
   <IsLoadingWrapper isLoading={isLoading}>
-    <ul>
+    <div>
       {
-        items.map(item => <ShoppingItem key={item.id}>{JSON.stringify(item)}</ShoppingItem>)
+        items.map(item => <ShoppingItem key={item.id} item={item} />)
       }
-    </ul>
+    </div>
   </IsLoadingWrapper>
 );
 

@@ -6,7 +6,7 @@ import './navigation-item.less';
 
 const NavigationItem = props => (
   <NavLink
-    className="navigation-item"
+    className="navigation-item semi-bold"
     activeClassName="navigation-item--active"
     {...props}
   />

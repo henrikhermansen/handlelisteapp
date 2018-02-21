@@ -6,10 +6,12 @@ import * as paths from '../../constants/paths';
 import './navigation.less';
 
 const Navigation = () => (
-  <nav className="navigation">
-    <NavigationItem exact>Root</NavigationItem>
-    <NavigationItem to={paths.shoppingList} exact>Handleliste</NavigationItem>
-  </nav>
+  <div className="fixed-bottom">
+    <nav className="navigation">
+      <NavigationItem exact>Root</NavigationItem>
+      <NavigationItem to={paths.shoppingList} exact>Handleliste</NavigationItem>
+    </nav>
+  </div>
 );
 
 export default Navigation;
