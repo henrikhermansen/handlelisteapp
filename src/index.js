@@ -18,7 +18,7 @@ const renderApp = Component => render(
       </AppContainer>
     </Provider>
   </BrowserRouter>
-  , document.querySelector('#main'),
+  , document.querySelector('#app'),
 );
 
 renderApp(App);

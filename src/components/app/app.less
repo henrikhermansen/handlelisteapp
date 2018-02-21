@@ -4,6 +4,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: "Nunito", Arial, "Helvetica Neue", Helvetica, sans-serif;
+  background: @quick-silver;
 }
 
 .semi-bold {
@@ -16,6 +17,13 @@ body {
 
 main {
   width: @app-width;
-  margin: @app-spacing auto;
-  padding: @app-spacing;
+  margin: 0 auto;
+  padding: 0;
+  height: 100vh;
+  background: #fff;
+  box-shadow: 0 0 25px 0 rgba(0, 0, 0, .7);
+
+  >div {
+    padding: @app-spacing;
+  }
 }

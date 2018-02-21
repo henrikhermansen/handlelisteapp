@@ -30,11 +30,13 @@ class App extends Component {
     return (
       <IsLoadingWrapper isLoading={initialization.isInitializing}>
         <main>
-          <Switch>
-            <Route path={paths.root} exact component={() => <div />} />
-            <Route path={paths.shoppingList} component={ShoppingList} />
-            <Route component={NotFound} />
-          </Switch>
+          <div>
+            <Switch>
+              <Route path={paths.root} exact component={() => <div />} />
+              <Route path={paths.shoppingList} component={ShoppingList} />
+              <Route component={NotFound} />
+            </Switch>
+          </div>
         </main>
         <Navigation />
       </IsLoadingWrapper>
