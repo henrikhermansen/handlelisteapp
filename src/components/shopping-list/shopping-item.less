@@ -6,20 +6,34 @@
   flex-flow: row nowrap;
   margin-bottom: 2px;
 
-  span {
+  >span {
     &:first-child {
       text-align: left;
-      flex-basis: 70%;
+      background: @cool-green;
       margin-left: 0;
       border-radius: @border-radius 0 0 @border-radius;
     }
     &:last-child {
       border-radius: 0 @border-radius @border-radius 0;
+      svg {
+        fill: @dark-red;
+      }
     }
     text-align: center;
-    flex-basis: 15%;
+    flex-basis: 10%;
     margin-left: 1px;
     padding: 8px;
-    background: @cool-green;
+    border: 1px solid @cool-green;
+    transition: flex-basis .5s ease-in-out, background-color .7s ease-in-out;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    &.expanded {
+      flex-basis: 80%;
+      background: @cool-green;
+    }
+    svg {
+      fill: @dark-green;
+    }
   }
 }
