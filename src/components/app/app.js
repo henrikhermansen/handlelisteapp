@@ -28,7 +28,7 @@ class App extends Component {
   render() {
     const { initialization } = this.props;
     return (
-      <IsLoadingWrapper isLoading={initialization.isInitializing}>
+      <IsLoadingWrapper isLoading={initialization.isInitializing} large>
         <main>
           <div>
             <Switch>

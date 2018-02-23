@@ -20,5 +20,5 @@ const xhrPromise = (uri, options = {}) => new Promise((resolve, reject) => xhr(
 
 export default {
   get: uri => xhrPromise(uri),
-  post: (uri, body) => xhrPromise(uri, { body }),
+  post: (uri, body) => xhrPromise(uri, { body, method: 'post' }),
 };

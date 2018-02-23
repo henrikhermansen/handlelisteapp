@@ -4,10 +4,12 @@ import PropTypes from 'prop-types';
 import ShoppingItem from './shopping-item';
 import IsLoadingWrapper from '../is-loading-wrapper/is-loading-wrapper';
 
-const ShoppingList = ({ isLoading, items }) => (
-  <IsLoadingWrapper isLoading={isLoading}>
+const ShoppingList = ({ isLoading, items, postPurchasedItem }) => (
+  <IsLoadingWrapper isLoading={isLoading} large>
     {
-      items.map(item => <ShoppingItem key={item.id} item={item} />)
+      items.map(item => (
+        <ShoppingItem key={item.id} item={item} postPurchasedItem={postPurchasedItem} />
+      ))
     }
   </IsLoadingWrapper>
 );
@@ -15,6 +17,7 @@ const ShoppingList = ({ isLoading, items }) => (
 ShoppingList.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   items: PropTypes.array.isRequired,
+  postPurchasedItem: PropTypes.func.isRequired,
 };
 
 export default ShoppingList;
