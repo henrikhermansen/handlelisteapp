@@ -1,26 +1,15 @@
 import { connect } from 'react-redux';
 
 import ShoppingList from './shopping-list';
-import { postPurchasedItem } from '../../actions/purchased-items';
+import { updateBagItem } from '../../actions/bag-items';
 
 const findItemFromItemId = (items, itemId) => items.find(item => item.id === itemId);
-
-const findPurchasedItemFromBagItemId = (purchasedItems, bagItemId) =>
-  purchasedItems.find(purchasedItem => purchasedItem.bagItemId === bagItemId);
 
 const mapItemDataToBagItem = (bagItem, items) => {
   const item = findItemFromItemId(items, bagItem.itemId);
   return ({
     ...bagItem,
     name: item && item.name,
-  });
-};
-
-const mapPurchasedDataToBagItem = (bagItem, purchasedItems) => {
-  const purchasedItem = findPurchasedItemFromBagItemId(purchasedItems, bagItem.id);
-  return ({
-    ...bagItem,
-    purchased: purchasedItem && purchasedItem.purchased,
   });
 };
 
@@ -34,13 +23,12 @@ const mapStateToProps = state => ({
   isLoading: state.bagItems.isLoading,
   items: state.bagItems.items
     .map(bagItem => mapItemDataToBagItem(bagItem, state.items.items))
-    .map(bagItem => mapPurchasedDataToBagItem(bagItem, state.purchasedItems.items))
     .filter(filterNonPurchasedOrPurchasedToday)
     .sort(sortByDateAdded),
 });
 
 const mapDispatchToProps = dispatch => ({
-  postPurchasedItem: bagItemId => dispatch(postPurchasedItem(bagItemId)),
+  updateBagItem: bagItem => dispatch(updateBagItem(bagItem)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingList);

@@ -21,24 +21,20 @@
     {
       "id": 0,
       "added": "2018-02-13T21:33:41.071Z",
+      "purchased": "2018-02-23T19:21:41.071Z",
       "itemId": 0
     },
     {
       "id": 1,
       "added": "2018-02-13T21:34:51.071Z",
+      "purchased": false,
       "itemId": 1
     },
     {
       "id": 2,
       "added": "2018-02-13T21:35:51.071Z",
+      "purchased": false,
       "itemId": 3
-    }
-  ],
-  "purchasedItems": [
-    {
-      "id": 0,
-      "purchased": "2018-02-23T19:21:41.071Z",
-      "bagItemId": 0
     }
   ]
 }

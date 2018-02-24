@@ -6,7 +6,7 @@ import Checkmark from '../svg/checkmark';
 
 import './shopping-item.less';
 
-const ShoppingItem = ({ item, postPurchasedItem }) => (
+const ShoppingItem = ({ item, updateBagItem }) => (
   <div
     className={classnames(
       'shopping-item',
@@ -17,7 +17,7 @@ const ShoppingItem = ({ item, postPurchasedItem }) => (
       {item.name}
     </span>
     <span>
-      <button onClick={() => postPurchasedItem(item.id)}>
+      <button onClick={() => updateBagItem(item)}>
         <Checkmark />
       </button>
     </span>
@@ -26,7 +26,7 @@ const ShoppingItem = ({ item, postPurchasedItem }) => (
 
 ShoppingItem.propTypes = {
   item: PropTypes.object.isRequired,
-  postPurchasedItem: PropTypes.func.isRequired,
+  updateBagItem: PropTypes.func.isRequired,
 };
 
 export default ShoppingItem;
