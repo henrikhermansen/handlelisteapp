@@ -5,25 +5,24 @@
   display: flex;
   flex-flow: row nowrap;
   margin-bottom: 2px;
+  line-height: 27px;
 
   >span {
     &:first-child {
       text-align: left;
       margin-left: 0;
-      flex-basis: 90%;
+      padding: 8px;
+      flex-basis: 85%;
       border-radius: @border-radius 0 0 @border-radius;
     }
     &:last-child {
-      flex-basis: 10%;
+      padding: 0;
+      flex-basis: 15%;
       border-radius: 0 @border-radius @border-radius 0;
-      svg {
-        fill: #fff;
-      }
     }
     background: @cool-green;
     text-align: center;
     margin-left: 1px;
-    padding: 8px;
     border: 1px solid @cool-green;
     white-space: nowrap;
     overflow: hidden;
@@ -35,17 +34,16 @@
     background: transparent;
     border: 0;
     outline: 0;
+    padding: 0;
+    width: 43px + 16px;
+    height: 43px;
+    cursor: pointer;
   }
 
   &--purchased {
     >span {
       color: @quick-silver;
       background: #fff;
-      &:last-child {
-        svg {
-          fill: @grass;
-        }
-      }
     }
   }
 }

@@ -29,7 +29,10 @@ class ShoppingItem extends Component {
       ...item,
       purchased: item.purchased ? false : new Date().toJSON(),
     }).then(
-      newItem => this.setState({ isLoading: false }, () => updateBagItem(newItem)),
+      newItem => this.setState(
+        { isLoading: false, error: undefined },
+        () => updateBagItem(newItem),
+      ),
       error => this.setState({ isLoading: false, error }),
     ));
   };
@@ -48,17 +51,13 @@ class ShoppingItem extends Component {
         </span>
         <span>
           <IsLoadingWrapper isLoading={this.state.isLoading} inline>
-            {
-              !this.state.error
-                ? (
-                  <button onClick={this.togglePurchasedStatus}>
-                    <Checkmark />
-                  </button>
-                )
-                : (
-                  <Cross />
-                )
-            }
+            <button onClick={this.togglePurchasedStatus}>
+              {
+                !this.state.error
+                  ? <Checkmark fill={item.purchased ? 'grass' : 'white'} />
+                  : <Cross fill="dark-red" />
+              }
+            </button>
           </IsLoadingWrapper>
         </span>
       </div>

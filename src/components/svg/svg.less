@@ -1,0 +1,18 @@
+@import '../../common-less/variables';
+
+.fill-color(@color) {
+  &.svg--@{color} {
+    svg {
+      fill: @@color;
+    }
+  }
+}
+
+.svg {
+  .fill-color(white);
+  .fill-color(quick-silver);
+  .fill-color(cool-green);
+  .fill-color(grass);
+  .fill-color(dark-green);
+  .fill-color(dark-red);
+}
