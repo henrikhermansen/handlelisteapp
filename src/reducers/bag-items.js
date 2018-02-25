@@ -1,4 +1,7 @@
-import { FETCH_BAG_ITEMS, FETCH_BAG_ITEMS_FAILED, FETCH_BAG_ITEMS_SUCCESS } from '../actions/bag-items';
+import {
+  FETCH_BAG_ITEMS, FETCH_BAG_ITEMS_FAILED, FETCH_BAG_ITEMS_SUCCESS,
+  UPDATE_BAG_ITEM,
+} from '../actions/bag-items';
 
 const defaultState = {
   items: [],
@@ -18,6 +21,11 @@ export default (state = defaultState, action) => {
     case FETCH_BAG_ITEMS_FAILED:
       return {
         ...state, isLoading: false, isFetched: true, error: action.error,
+      };
+    case UPDATE_BAG_ITEM:
+      return {
+        ...state,
+        items: state.items.map(item => (item.id === action.item.id ? action.item : item)),
       };
     default:
       return state;

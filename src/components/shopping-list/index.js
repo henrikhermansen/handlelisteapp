@@ -3,32 +3,22 @@ import { connect } from 'react-redux';
 import ShoppingList from './shopping-list';
 import { updateBagItem } from '../../actions/bag-items';
 
-const findItemFromItemId = (items, itemId) => items.find(item => item.id === itemId);
-
-const mapItemDataToBagItem = (bagItem, items) => {
-  const item = findItemFromItemId(items, bagItem.itemId);
-  return ({
-    ...bagItem,
-    name: item && item.name,
-  });
-};
-
 const todayDateString = new Date().toLocaleDateString();
 const filterNonPurchasedOrPurchasedToday = bagItem =>
-  !bagItem.purchased || bagItem.purchased.toLocaleDateString() === todayDateString;
+  !bagItem.purchased || new Date(bagItem.purchased).toLocaleDateString() === todayDateString;
 
-const sortByDateAdded = (a, b) => a.added - b.added;
+const sortByDateAdded = (a, b) => a.added.localeCompare(b.added);
 
 const mapStateToProps = state => ({
   isLoading: state.bagItems.isLoading,
-  items: state.bagItems.items
-    .map(bagItem => mapItemDataToBagItem(bagItem, state.items.items))
+  items: state.items.items,
+  bagItems: state.bagItems.items
     .filter(filterNonPurchasedOrPurchasedToday)
     .sort(sortByDateAdded),
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateBagItem: bagItem => dispatch(updateBagItem(bagItem)),
+  updateBagItem: item => dispatch(updateBagItem(item)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingList);
