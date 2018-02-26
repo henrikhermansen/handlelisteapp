@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import Navigation from '../navigation/navigation';
 import NotFound from '../not-found/not-found';
-import ShoppingList from '../shopping-list';
+import Shopping from '../shopping/shopping';
 import * as paths from '../../constants/paths';
 
 import './app.less';
@@ -33,7 +33,7 @@ class App extends Component {
           <div>
             <Switch>
               <Route path={paths.root} exact component={() => <div />} />
-              <Route path={paths.shoppingList} component={ShoppingList} />
+              <Route path={paths.shoppingList} component={Shopping} />
               <Route component={NotFound} />
             </Switch>
           </div>
