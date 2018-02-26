@@ -19,6 +19,9 @@
       padding: 0;
       flex-basis: 15%;
       border-radius: 0 @border-radius @border-radius 0;
+      .spinner {
+        margin: 9px auto;
+      }
     }
     background: @cool-green;
     text-align: center;
@@ -38,6 +41,12 @@
     width: 43px + 16px;
     height: 43px;
     cursor: pointer;
+    &:hover {
+      svg {
+        stroke: @grass;
+        stroke-opacity: 0.3;
+      }
+    }
   }
 
   &--purchased {
