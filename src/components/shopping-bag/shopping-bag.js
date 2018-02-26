@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ShoppingItem from './shopping-item';
+import BagItem from '../bag-item/bag-item';
 import IsLoadingWrapper from '../is-loading-wrapper/is-loading-wrapper';
 
 const findItemFromItemId = (items, itemId) => {
@@ -9,7 +9,7 @@ const findItemFromItemId = (items, itemId) => {
   return item ? item.name : 'Navn mangler';
 };
 
-const ShoppingList = ({
+const ShoppingBag = ({
   isLoading,
   items,
   bagItems,
@@ -18,7 +18,7 @@ const ShoppingList = ({
   <IsLoadingWrapper isLoading={isLoading} large>
     {
       bagItems.map(bagItem => (
-        <ShoppingItem
+        <BagItem
           key={bagItem.id}
           item={bagItem}
           itemName={findItemFromItemId(items, bagItem.itemId)}
@@ -29,11 +29,11 @@ const ShoppingList = ({
   </IsLoadingWrapper>
 );
 
-ShoppingList.propTypes = {
+ShoppingBag.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   items: PropTypes.array.isRequired,
   bagItems: PropTypes.array.isRequired,
   updateBagItem: PropTypes.func.isRequired,
 };
 
-export default ShoppingList;
+export default ShoppingBag;

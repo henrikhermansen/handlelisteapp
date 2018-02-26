@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import ShoppingList from './shopping-list';
+import ShoppingBag from './shopping-bag';
 import { updateBagItem } from '../../actions/bag-items';
 
 const todayDateString = new Date().toLocaleDateString();
@@ -21,4 +21,4 @@ const mapDispatchToProps = dispatch => ({
   updateBagItem: item => dispatch(updateBagItem(item)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShoppingList);
+export default connect(mapStateToProps, mapDispatchToProps)(ShoppingBag);

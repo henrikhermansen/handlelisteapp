@@ -5,11 +5,11 @@ import classnames from 'classnames';
 import Checkmark from '../svg/checkmark';
 import Cross from '../svg/cross';
 
-import './shopping-item.less';
+import './bag-item.less';
 import IsLoadingWrapper from '../is-loading-wrapper/is-loading-wrapper';
 import { putBagItem } from '../../api/bag-items';
 
-class ShoppingItem extends Component {
+class BagItem extends Component {
   static propTypes = {
     item: PropTypes.object.isRequired,
     itemName: PropTypes.string.isRequired,
@@ -42,8 +42,8 @@ class ShoppingItem extends Component {
     return (
       <div
         className={classnames(
-          'shopping-item',
-          { 'shopping-item--purchased': item.purchased },
+          'bag-item',
+          { 'bag-item--purchased': item.purchased },
         )}
       >
         <span>
@@ -65,4 +65,4 @@ class ShoppingItem extends Component {
   }
 }
 
-export default ShoppingItem;
+export default BagItem;

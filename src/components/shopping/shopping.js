@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 
-import ShoppingList from '../shopping-list';
+import ShoppingBag from '../shopping-bag';
 import AddBagItem from '../add-bag-item';
 
 export default () => (
   <Fragment>
-    <ShoppingList />
+    <ShoppingBag />
     <AddBagItem />
   </Fragment>
 );
