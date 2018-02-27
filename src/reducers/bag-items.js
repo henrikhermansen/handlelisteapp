@@ -1,6 +1,6 @@
 import {
   FETCH_BAG_ITEMS, FETCH_BAG_ITEMS_FAILED, FETCH_BAG_ITEMS_SUCCESS,
-  UPDATE_BAG_ITEM,
+  UPDATE_BAG_ITEM, ADD_BAG_ITEM,
 } from '../actions/bag-items';
 
 const defaultState = {
@@ -26,6 +26,11 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         items: state.items.map(item => (item.id === action.item.id ? action.item : item)),
+      };
+    case ADD_BAG_ITEM:
+      return {
+        ...state,
+        items: [...state.items, action.bagBtem],
       };
     default:
       return state;
