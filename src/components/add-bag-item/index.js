@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addBagItem: item => dispatch(addBagItem(item)),
+  addBagItem: bagItem => dispatch(addBagItem(bagItem)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddBagItem);

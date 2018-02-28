@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import IsLoadingWrapper from '../is-loading-wrapper/is-loading-wrapper';
 import Cross from '../svg/cross';
 import Suggestions from '../suggestions/suggestions';
+import { postBagItem } from '../../api/bag-items';
 
 import './add-bag-item.less';
 
@@ -22,8 +23,19 @@ class AddBagItem extends Component {
   };
 
   addBagItem = () => {
-    if (this.state.value === 'not yet implemented') {
-      this.props.addBagItem();
+    const item = this.props.items.find(_item => _item.name === this.state.value);
+    if (item) {
+      this.setState({
+        isLoading: true,
+      }, () => postBagItem({
+        added: new Date().toJSON(),
+        itemId: item.id,
+      }).then(
+        newItem => this.setState({
+          value: '', isLoading: false, error: undefined,
+        }, () => this.props.addBagItem(newItem)),
+        error => this.setState({ isLoading: false, error }),
+      ));
     }
   };
 

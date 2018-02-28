@@ -13,4 +13,4 @@ export const fetchBagItemsFailed = error => ({ type: FETCH_BAG_ITEMS_FAILED, err
 
 export const updateBagItem = item => ({ type: UPDATE_BAG_ITEM, item });
 
-export const addBagItem = item => ({ type: ADD_BAG_ITEM, item });
+export const addBagItem = bagItem => ({ type: ADD_BAG_ITEM, bagItem });

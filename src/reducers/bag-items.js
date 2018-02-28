@@ -30,7 +30,7 @@ export default (state = defaultState, action) => {
     case ADD_BAG_ITEM:
       return {
         ...state,
-        items: [...state.items, action.bagBtem],
+        items: [...state.items, action.bagItem],
       };
     default:
       return state;
