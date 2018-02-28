@@ -9,8 +9,8 @@ import {
 
 function* fetchBagItemsRequest() {
   try {
-    const items = yield call(getBagItems);
-    yield put(fetchBagItemsSuccess(items));
+    const bagItems = yield call(getBagItems);
+    yield put(fetchBagItemsSuccess(bagItems));
   } catch (e) {
     console.error(e);
     yield put(fetchBagItemsFailed(e));

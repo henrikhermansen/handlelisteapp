@@ -20,7 +20,7 @@ const ShoppingBag = ({
       bagItems.map(bagItem => (
         <BagItem
           key={bagItem.id}
-          item={bagItem}
+          bagItem={bagItem}
           itemName={findItemFromItemId(items, bagItem.itemId)}
           updateBagItem={updateBagItem}
         />

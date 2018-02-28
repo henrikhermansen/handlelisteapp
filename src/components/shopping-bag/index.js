@@ -12,7 +12,7 @@ const sortByDateAdded = (a, b) => a.added.localeCompare(b.added);
 const mapStateToProps = state => ({
   isLoading: state.bagItems.isLoading || state.items.isLoading,
   items: state.items.items,
-  bagItems: state.bagItems.items
+  bagItems: state.bagItems.bagItems
     .filter(filterNonPurchasedOrPurchasedToday)
     .sort(sortByDateAdded),
 });

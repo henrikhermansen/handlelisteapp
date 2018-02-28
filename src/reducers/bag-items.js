@@ -4,7 +4,7 @@ import {
 } from '../actions/bag-items';
 
 const defaultState = {
-  items: [],
+  bagItems: [],
   isLoading: false,
   isFetched: false,
   error: undefined,
@@ -16,7 +16,7 @@ export default (state = defaultState, action) => {
       return { ...state, isLoading: true, error: undefined };
     case FETCH_BAG_ITEMS_SUCCESS:
       return {
-        ...state, items: action.items, isLoading: false, isFetched: true,
+        ...state, bagItems: action.bagItems, isLoading: false, isFetched: true,
       };
     case FETCH_BAG_ITEMS_FAILED:
       return {
@@ -25,12 +25,13 @@ export default (state = defaultState, action) => {
     case UPDATE_BAG_ITEM:
       return {
         ...state,
-        items: state.items.map(item => (item.id === action.item.id ? action.item : item)),
+        bagItems: state.bagItems.map(bagItem =>
+          (bagItem.id === action.bagItem.id ? action.bagItem : bagItem)),
       };
     case ADD_BAG_ITEM:
       return {
         ...state,
-        items: [...state.items, action.bagItem],
+        bagItems: [...state.bagItems, action.bagItem],
       };
     default:
       return state;

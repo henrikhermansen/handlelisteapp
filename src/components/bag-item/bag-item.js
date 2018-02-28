@@ -11,7 +11,7 @@ import { putBagItem } from '../../api/bag-items';
 
 class BagItem extends Component {
   static propTypes = {
-    item: PropTypes.object.isRequired,
+    bagItem: PropTypes.object.isRequired,
     itemName: PropTypes.string.isRequired,
     updateBagItem: PropTypes.func.isRequired,
   };
@@ -22,28 +22,28 @@ class BagItem extends Component {
   };
 
   togglePurchasedStatus = () => {
-    const { item, updateBagItem } = this.props;
+    const { bagItem, updateBagItem } = this.props;
     this.setState({
       isLoading: true,
     }, () => putBagItem({
-      ...item,
-      purchased: item.purchased ? false : new Date().toJSON(),
+      ...bagItem,
+      purchased: bagItem.purchased ? false : new Date().toJSON(),
     }).then(
-      newItem => this.setState(
+      updatedBagItem => this.setState(
         { isLoading: false, error: undefined },
-        () => updateBagItem(newItem),
+        () => updateBagItem(updatedBagItem),
       ),
       error => this.setState({ isLoading: false, error }),
     ));
   };
 
   render() {
-    const { item, itemName } = this.props;
+    const { bagItem, itemName } = this.props;
     return (
       <div
         className={classnames(
           'bag-item',
-          { 'bag-item--purchased': item.purchased },
+          { 'bag-item--purchased': bagItem.purchased },
         )}
       >
         <span>
@@ -54,7 +54,7 @@ class BagItem extends Component {
             <button onClick={this.togglePurchasedStatus}>
               {
                 !this.state.error
-                  ? <Checkmark fill={item.purchased ? 'grass' : 'white'} />
+                  ? <Checkmark fill={bagItem.purchased ? 'grass' : 'white'} />
                   : <Cross fill="dark-red" />
               }
             </button>

@@ -7,10 +7,10 @@ export const ADD_BAG_ITEM = 'ADD_BAG_ITEM';
 
 export const fetchBagItems = () => ({ type: FETCH_BAG_ITEMS });
 
-export const fetchBagItemsSuccess = items => ({ type: FETCH_BAG_ITEMS_SUCCESS, items });
+export const fetchBagItemsSuccess = bagItems => ({ type: FETCH_BAG_ITEMS_SUCCESS, bagItems });
 
 export const fetchBagItemsFailed = error => ({ type: FETCH_BAG_ITEMS_FAILED, error });
 
-export const updateBagItem = item => ({ type: UPDATE_BAG_ITEM, item });
+export const updateBagItem = bagItem => ({ type: UPDATE_BAG_ITEM, bagItem });
 
 export const addBagItem = bagItem => ({ type: ADD_BAG_ITEM, bagItem });
