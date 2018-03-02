@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import IsLoadingWrapper from '../is-loading-wrapper/is-loading-wrapper';
 import Cross from '../svg/cross';
 import Suggestions from '../suggestions/suggestions';
+import Input from '../input/input';
 import { postBagItem } from '../../api/bag-items';
 
 import './add-bag-item.less';
@@ -43,9 +44,7 @@ class AddBagItem extends Component {
     return (
       <IsLoadingWrapper isLoading={this.props.isLoading || this.state.isLoading}>
         <div className="add-bag-item">
-          <div style={{ display: 'none' }}>{JSON.stringify(this.props.items)}</div>
-          <input
-            type="text"
+          <Input
             placeholder="Legg til en vare i listen"
             value={this.state.value}
             onChange={event => this.setState({ value: event.target.value })}

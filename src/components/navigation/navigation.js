@@ -8,7 +8,6 @@ import './navigation.less';
 const Navigation = () => (
   <div className="fixed-bottom">
     <nav className="navigation">
-      <NavigationItem exact>Root</NavigationItem>
       <NavigationItem to={paths.shopping} exact>Handleliste</NavigationItem>
     </nav>
   </div>
