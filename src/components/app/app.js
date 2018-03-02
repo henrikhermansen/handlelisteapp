@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Navigation from '../navigation/navigation';
 import NotFound from '../not-found/not-found';
@@ -32,8 +32,12 @@ class App extends Component {
         <main>
           <div>
             <Switch>
-              <Route path={paths.root} exact component={() => <div />} />
-              <Route path={paths.shoppingList} component={Shopping} />
+              <Route
+                path={paths.root}
+                exact
+                component={() => <Redirect to={paths.shopping} />}
+              />
+              <Route path={paths.shopping} component={Shopping} />
               <Route component={NotFound} />
             </Switch>
           </div>

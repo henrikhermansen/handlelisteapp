@@ -1,3 +1,3 @@
 export const root = '/';
 
-export const shoppingList = `${root}shopping-list`;
+export const shopping = `${root}shopping-list`;
