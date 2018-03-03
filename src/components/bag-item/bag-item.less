@@ -5,28 +5,25 @@
   display: flex;
   flex-flow: row nowrap;
   margin-bottom: 2px;
-  line-height: 27px;
+  line-height: @line-height;
+  border-bottom: 1px dotted @cool-green;
+  overflow: hidden;
 
-  >span {
+  > span {
     &:first-child {
-      text-align: left;
       margin-left: 0;
-      padding: 8px;
+      padding: @component-spacing;
       flex-basis: 85%;
-      border-radius: @border-radius 0 0 @border-radius;
     }
     &:last-child {
+      text-align: right;
       padding: 0;
       flex-basis: 15%;
-      border-radius: 0 @border-radius @border-radius 0;
       .spinner {
         margin: 9px auto;
       }
     }
-    background: @cool-green;
-    text-align: center;
-    margin-left: 1px;
-    border: 1px solid @cool-green;
+    background: @white;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -41,18 +38,25 @@
     width: 43px + 16px;
     height: 43px;
     cursor: pointer;
+    svg {
+      stroke: @grass;
+      stroke-opacity: .3;
+      transition: stroke-opacity .1s ease-in;
+    }
     &:hover {
       svg {
-        stroke: @grass;
-        stroke-opacity: 0.3;
+        stroke-opacity: 1;
+      }
+    }
+    &:focus {
+      svg {
+        stroke: @dark-green;
+        stroke-opacity: 1;
       }
     }
   }
 
   &--purchased {
-    >span {
-      color: @quick-silver;
-      background: #fff;
-    }
+    color: @quick-silver;
   }
 }

@@ -6,6 +6,7 @@ import IsLoadingWrapper from '../is-loading-wrapper/is-loading-wrapper';
 import Cross from '../svg/cross';
 import Suggestions from '../suggestions/suggestions';
 import Input from '../input/input';
+import KeyCodes from '../../constants/KeyCodes';
 import { postBagItem } from '../../api/bag-items';
 
 import './add-bag-item.less';
@@ -23,8 +24,14 @@ class AddBagItem extends Component {
     error: undefined,
   };
 
+  onKeyDown = (event) => {
+    if (event.which === KeyCodes.ENTER) {
+      this.addBagItem();
+    }
+  };
+
   addBagItem = () => {
-    const item = this.props.items.find(_item => _item.name === this.state.value);
+    const item = this.itemFromValue();
     if (item) {
       this.setState({
         isLoading: true,
@@ -40,6 +47,8 @@ class AddBagItem extends Component {
     }
   };
 
+  itemFromValue = () => this.props.items.find(item => item.name === this.state.value);
+
   render() {
     return (
       <IsLoadingWrapper isLoading={this.props.isLoading || this.state.isLoading}>
@@ -47,23 +56,30 @@ class AddBagItem extends Component {
           <Input
             placeholder="Legg til en vare i listen"
             value={this.state.value}
-            onChange={event => this.setState({ value: event.target.value })}
+            onChange={event => this.setState({ value: event.target.value, error: undefined })}
+            onKeyDown={this.onKeyDown}
           />
-          <button onClick={this.addBagItem}>
-            <Cross
-              fill="dark-red"
-              className={classnames(
-                'add-bag-item__button',
-                { 'add-bag-item__button--rotated': !this.state.error },
-              )}
-            />
-          </button>
+          <span>
+            <button
+              onClick={this.addBagItem}
+              tabIndex={this.itemFromValue() ? '0' : '-1'}
+            >
+              <Cross
+                fill={this.state.error ? 'dark-red' : 'dark-green'}
+                className={classnames(
+                    'add-bag-item__button',
+                    { 'add-bag-item__button--rotated': !this.state.error },
+                    { 'add-bag-item__button--disabled': !this.itemFromValue() },
+                  )}
+              />
+            </button>
+          </span>
+          <Suggestions
+            values={this.props.items.map(item => item.name)}
+            input={this.state.value}
+            onSelect={value => this.setState({ value })}
+          />
         </div>
-        <Suggestions
-          values={this.props.items.map(item => item.name)}
-          input={this.state.value}
-          onSelect={value => this.setState({ value })}
-        />
       </IsLoadingWrapper>
     );
   }
