@@ -54,7 +54,7 @@ class BagItem extends Component {
             <button onClick={this.togglePurchasedStatus}>
               {
                 !this.state.error
-                  ? <Checkmark fill={bagItem.purchased ? 'grass' : 'white'} />
+                  ? <Checkmark fill={bagItem.purchased ? 'quick-silver' : 'white'} />
                   : <Cross fill="dark-red" />
               }
             </button>

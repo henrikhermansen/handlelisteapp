@@ -1,5 +1,55 @@
-.add-bag-item__button--rotated {
-  svg {
-    transform: rotate(45deg);
+@import '../../common-less/variables';
+
+.add-bag-item {
+  margin-bottom: @component-spacing * 2;
+  display: flex;
+  flex-flow: row wrap;
+  border: 1px solid @grass;
+  border-radius: @border-radius;
+  overflow: hidden;
+
+  .input {
+    flex-basis: 85%;
+  }
+
+  span {
+    flex-basis: 15%;
+    text-align: right;
+    button {
+      background: transparent;
+      border: 0;
+      outline: 0;
+      padding: 0;
+      width: 43px + 16px;
+      height: 43px;
+      cursor: pointer;
+      svg {
+        stroke: @white;
+        stroke-opacity: .3;
+        transition: stroke .1s ease-in;
+      }
+      &:hover {
+        svg {
+          stroke: @grass;
+        }
+      }
+      &:focus {
+        svg {
+          stroke: @grass;
+          stroke-opacity: 1;
+        }
+      }
+    }
+  }
+
+  &__button {
+    &--rotated {
+      svg {
+        transform: rotate(45deg);
+      }
+    }
+    &--disabled {
+      opacity: .2;
+    }
   }
 }

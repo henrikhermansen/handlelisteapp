@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import BagItem from '../bag-item/bag-item';
 import IsLoadingWrapper from '../is-loading-wrapper/is-loading-wrapper';
 
+import './shopping-bag.less';
+
 const findItemFromItemId = (items, itemId) => {
   const item = items.find(_item => _item.id === itemId);
   return item ? item.name : 'Navn mangler';
@@ -16,7 +18,8 @@ const ShoppingBag = ({
   updateBagItem,
 }) => (
   <IsLoadingWrapper isLoading={isLoading} large>
-    {
+    <div className="shopping-bag">
+      {
       bagItems.map(bagItem => (
         <BagItem
           key={bagItem.id}
@@ -26,6 +29,7 @@ const ShoppingBag = ({
         />
       ))
     }
+    </div>
   </IsLoadingWrapper>
 );
 

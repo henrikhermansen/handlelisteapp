@@ -5,7 +5,7 @@ import AddBagItem from '../add-bag-item';
 
 export default () => (
   <Fragment>
-    <ShoppingBag />
     <AddBagItem />
+    <ShoppingBag />
   </Fragment>
 );
