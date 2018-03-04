@@ -1,14 +1,15 @@
 @import '../../common-less/variables';
 
 .input {
-  padding: @component-spacing;
-  border: 0;
+  padding: @component-spacing / 4;
+  margin: @component-spacing / 2;
+  border: 1px dotted @cool-green;
   outline: 0;
   line-height: @line-height;
   font-size: @font-size;
   width: 100%;
 
   &:focus {
-    box-shadow: inset 0 0 0 1px @cool-green;
+    border: 1px dotted @grass;
   }
 }

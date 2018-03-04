@@ -9,6 +9,7 @@ const Navigation = () => (
   <div className="fixed-bottom">
     <nav className="navigation">
       <NavigationItem to={paths.shopping} exact>Handleliste</NavigationItem>
+      <NavigationItem to={paths.items} exact>Vareutvalg</NavigationItem>
     </nav>
   </div>
 );

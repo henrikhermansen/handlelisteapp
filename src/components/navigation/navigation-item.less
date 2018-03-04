@@ -3,15 +3,14 @@
 .navigation-item {
   flex-basis: 6em;
   padding: 12px 10px 8px 10px;
-  margin: 0 5px;
-  border: 1px solid black;
-  border-bottom: 0;
-  border-radius: @border-radius @border-radius 0 0;
-  color: #333;
+  margin: 0 2px;
+  color: @quick-silver;
   text-align: center;
   text-decoration: none;
+  background: fade(@cool-green, 70%);
 
   &--active {
-    color: red;
+    color: @black;
+    background: fade(@cool-green, 100%);
   }
 }

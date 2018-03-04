@@ -6,7 +6,7 @@ import IsLoadingWrapper from '../is-loading-wrapper/is-loading-wrapper';
 import Cross from '../svg/cross';
 import Suggestions from '../suggestions/suggestions';
 import Input from '../input/input';
-import KeyCodes from '../../constants/KeyCodes';
+import KeyCodes from '../../constants/key-codes';
 import { postBagItem } from '../../api/bag-items';
 
 import './add-bag-item.less';
@@ -53,12 +53,14 @@ class AddBagItem extends Component {
     return (
       <IsLoadingWrapper isLoading={this.props.isLoading || this.state.isLoading}>
         <div className="add-bag-item">
-          <Input
-            placeholder="Legg til en vare i listen"
-            value={this.state.value}
-            onChange={event => this.setState({ value: event.target.value, error: undefined })}
-            onKeyDown={this.onKeyDown}
-          />
+          <span>
+            <Input
+              placeholder="Legg til en vare i listen"
+              value={this.state.value}
+              onChange={event => this.setState({ value: event.target.value, error: undefined })}
+              onKeyDown={this.onKeyDown}
+            />
+          </span>
           <span>
             <button
               onClick={this.addBagItem}
