@@ -65,15 +65,13 @@ class AddBagItem extends Component {
             <button
               onClick={this.addBagItem}
               tabIndex={this.itemFromValue() ? '0' : '-1'}
+              className={classnames(
+                'add-bag-item__button',
+                { 'add-bag-item__button--rotated': !this.state.error },
+                { 'add-bag-item__button--disabled': !this.itemFromValue() },
+              )}
             >
-              <Cross
-                fill={this.state.error ? 'dark-red' : 'dark-green'}
-                className={classnames(
-                    'add-bag-item__button',
-                    { 'add-bag-item__button--rotated': !this.state.error },
-                    { 'add-bag-item__button--disabled': !this.itemFromValue() },
-                  )}
-              />
+              <Cross fill={this.state.error ? 'dark-red' : 'dark-green'} />
             </button>
           </span>
           <Suggestions
