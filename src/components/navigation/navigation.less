@@ -6,12 +6,74 @@
   width: 100%;
 }
 
+.navigation-wrapper {
+  position: relative;
+  width: @app-width;
+  margin: 0 auto;
+}
+
+.navigation-toggle {
+  background: @white;
+  position: absolute;
+  width: 40px;
+  height: 30px;
+  top: 6px;
+  left: 4px;
+  z-index: 2;
+  cursor: pointer;
+  padding-top: 5px;
+  user-select: none;
+  outline: 0;
+
+  span {
+    display: block;
+    background: @quick-silver;
+    border-radius: 3px;
+    width: 33px;
+    height: 4px;
+    margin: 0 auto 5px auto;
+    padding: 0;
+    transform-origin: 4px 0;
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0), background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0), opacity 0.55s ease;
+    opacity: 1;
+
+    &:first-child {
+    }
+    &:last-child {
+      transform-origin: 0 100%;
+    }
+  }
+
+  &--active {
+    span {
+      background: @dark-red;
+      &:first-child {
+        transform: rotate(45deg) translate(-2px, -1px);
+      }
+      &:nth-child(2) {
+        opacity: 0;
+        transform: rotate(0deg) scale(0.1, 0.1) translate(1px, -5px);
+      }
+      &:last-child {
+        transform: rotate(-45deg) translate(0, -1px);
+      }
+    }
+  }
+}
+
 .navigation {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  margin: 0 auto;
   width: @app-width;
-  background: fade(@white, 99%);
+  background: @white;
   border-top: 1px solid @quick-silver;
+  opacity: 0;
+  transition: transform .6s ease, opacity .8s ease;
+  transform: translate(0, 42px) scale(.5, .5);
+
+  &--visible {
+    opacity: 1;
+    transform: translate(0, 0) scale(1, 1);
+  }
 }
