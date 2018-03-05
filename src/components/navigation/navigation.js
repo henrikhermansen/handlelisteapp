@@ -2,19 +2,13 @@ import React, { PureComponent } from 'react';
 import classnames from 'classnames';
 
 import NavigationItem from './navigation-item';
+import NavigationToggle from '../navigation-toggle/navigation-toggle';
 import * as paths from '../../constants/paths';
-import KeyCodes from '../../constants/key-codes';
 
 import './navigation.less';
 
 class Navigation extends PureComponent {
   state = { visible: false };
-
-  onKeyDown = (event) => {
-    if (event.which === KeyCodes.ENTER) {
-      this.toggleVisible();
-    }
-  };
 
   toggleVisible = () => this.setState({ visible: !this.state.visible });
 
@@ -24,21 +18,10 @@ class Navigation extends PureComponent {
     return (
       <div className="fixed-bottom">
         <div className="navigation-wrapper">
-          <div
-            className={classnames(
-              'navigation-toggle',
-              { 'navigation-toggle--active': visible },
-            )}
-            onClick={this.toggleVisible}
-            onKeyDown={this.onKeyDown}
-            role="button"
-            aria-pressed={String(visible)}
-            tabIndex="0"
-          >
-            <span />
-            <span />
-            <span />
-          </div>
+          <NavigationToggle
+            visible={visible}
+            toggle={this.toggleVisible}
+          />
           <nav
             className={classnames(
               'navigation',
