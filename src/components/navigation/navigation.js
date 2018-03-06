@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import classnames from 'classnames';
 
 import NavigationItem from './navigation-item';
@@ -7,7 +7,7 @@ import * as paths from '../../constants/paths';
 
 import './navigation.less';
 
-class Navigation extends PureComponent {
+class Navigation extends Component {
   state = { visible: false };
 
   toggleVisible = () => this.setState({ visible: !this.state.visible });
