@@ -1,0 +1,58 @@
+@import '../../common-less/variables';
+
+.item {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  margin-bottom: 2px;
+  line-height: @line-height;
+  border-bottom: 1px dotted @cool-green;
+  overflow: hidden;
+
+  > span {
+    &:first-child {
+      margin-left: 0;
+      padding: @component-spacing;
+      flex-basis: 85%;
+    }
+    &:last-child {
+      text-align: right;
+      padding: 0;
+      flex-basis: 15%;
+      .spinner {
+        margin: 9px auto;
+      }
+    }
+    background: @white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    outline: 0;
+  }
+
+  button {
+    background: transparent;
+    border: 0;
+    outline: 0;
+    padding: 0;
+    width: 43px + 16px;
+    height: 43px;
+    cursor: pointer;
+    svg {
+      stroke: @grass;
+      stroke-opacity: .3;
+      transition: stroke-opacity .1s ease-in;
+    }
+    &:hover {
+      svg {
+        stroke-opacity: 1;
+      }
+    }
+    &:focus {
+      svg {
+        stroke: @dark-green;
+        stroke-opacity: 1;
+      }
+    }
+  }
+}

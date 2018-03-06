@@ -4,10 +4,10 @@ import classnames from 'classnames';
 
 import Checkmark from '../svg/checkmark';
 import Cross from '../svg/cross';
-
-import './bag-item.less';
 import IsLoadingWrapper from '../is-loading-wrapper/is-loading-wrapper';
 import { putBagItem } from '../../api/bag-items';
+
+import './bag-item.less';
 
 class BagItem extends Component {
   static propTypes = {

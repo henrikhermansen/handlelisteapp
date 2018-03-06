@@ -5,6 +5,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Navigation from '../navigation/navigation';
 import NotFound from '../not-found/not-found';
 import Shopping from '../shopping/shopping';
+import Assortment from '../assortment';
 import * as paths from '../../constants/paths';
 
 import './app.less';
@@ -38,6 +39,7 @@ class App extends Component {
                 component={() => <Redirect to={paths.shopping} />}
               />
               <Route path={paths.shopping} component={Shopping} />
+              <Route path={paths.items} component={Assortment} />
               <Route component={NotFound} />
             </Switch>
           </div>
