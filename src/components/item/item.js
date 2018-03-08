@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-import Checkmark from '../svg/checkmark';
+import Pencil from '../svg/pencil';
 import Cross from '../svg/cross';
 import IsLoadingWrapper from '../is-loading-wrapper/is-loading-wrapper';
+import Input from '../input/input';
 import { putItem } from '../../api/items';
 
 import './item.less';
@@ -17,6 +18,7 @@ class Item extends Component {
 
   state = {
     isLoading: false,
+    isEditing: false,
     error: undefined,
   };
 
@@ -27,6 +29,7 @@ class Item extends Component {
 
   render() {
     const { item } = this.props;
+    const { isEditing } = this.state;
     return (
       <div
         className={classnames(
@@ -35,14 +38,24 @@ class Item extends Component {
         )}
       >
         <span>
-          {item.name}
+          {
+            isEditing
+              ? (
+                <Input
+                  value={item.name}
+                  onChange={() => {}}
+                  focusOnMount
+                />
+              )
+              : item.name
+          }
         </span>
         <span>
           <IsLoadingWrapper isLoading={this.state.isLoading} inline>
-            <button onClick={() => {}}>
+            <button onClick={() => this.setState({ isEditing: !isEditing })}>
               {
                 !this.state.error
-                  ? <Checkmark fill={item.someProp ? 'quick-silver' : 'white'} />
+                  ? <Pencil fill={isEditing ? 'grass' : 'white'} />
                   : <Cross fill="dark-red" />
               }
             </button>
