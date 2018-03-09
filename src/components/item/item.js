@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
 
 import Pencil from '../svg/pencil';
-import Cross from '../svg/cross';
-import IsLoadingWrapper from '../is-loading-wrapper/is-loading-wrapper';
-import Input from '../input/input';
+import ItemInput from '../item-input/item-input';
 import { putItem } from '../../api/items';
 
 import './item.less';
@@ -16,50 +13,38 @@ class Item extends Component {
     updateItem: PropTypes.func.isRequired,
   };
 
-  state = {
-    isLoading: false,
-    isEditing: false,
-    error: undefined,
-  };
+  state = { isEditing: false };
 
-  notYetImplemented = () => {
-    putItem();
-    this.props.updateItem();
-  };
+  onSubmit = name => putItem({ ...this.props.item, name });
+
+  onSuccess = item =>
+    this.setState({ isEditing: !this.state.isEditing }, () =>
+      this.props.updateItem(item));
 
   render() {
     const { item } = this.props;
     const { isEditing } = this.state;
+
+    if (isEditing) {
+      return (
+        <ItemInput
+          value={item.name}
+          onSubmit={this.onSubmit}
+          onSuccess={this.onSuccess}
+          SubmitSvg={Pencil}
+        />
+      );
+    }
+
     return (
-      <div
-        className={classnames(
-          'item',
-          { 'item--someModifier': item.someProp },
-        )}
-      >
+      <div className="item">
         <span>
-          {
-            isEditing
-              ? (
-                <Input
-                  value={item.name}
-                  onChange={() => {}}
-                  focusOnMount
-                />
-              )
-              : item.name
-          }
+          {item.name}
         </span>
         <span>
-          <IsLoadingWrapper isLoading={this.state.isLoading} inline>
-            <button onClick={() => this.setState({ isEditing: !isEditing })}>
-              {
-                !this.state.error
-                  ? <Pencil fill={isEditing ? 'grass' : 'white'} />
-                  : <Cross fill="dark-red" />
-              }
-            </button>
-          </IsLoadingWrapper>
+          <button onClick={() => this.setState({ isEditing: !isEditing })}>
+            <Pencil fill={isEditing ? 'grass' : 'white'} />
+          </button>
         </span>
       </div>
     );
