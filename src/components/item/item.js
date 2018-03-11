@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Pencil from '../svg/pencil';
+import { Pencil } from '../svg';
 import ItemInput from '../item-input/item-input';
 import { putItem } from '../../api/items';
 
@@ -25,19 +25,28 @@ class Item extends Component {
     const { item } = this.props;
     const { isEditing } = this.state;
 
+    const Wrapper = ({ children }) => (
+      <div className="item">
+        {children}
+      </div>
+    );
+
     if (isEditing) {
       return (
-        <ItemInput
-          value={item.name}
-          onSubmit={this.onSubmit}
-          onSuccess={this.onSuccess}
-          SubmitSvg={Pencil}
-        />
+        <Wrapper>
+          <ItemInput
+            value={item.name}
+            onSubmit={this.onSubmit}
+            onSuccess={this.onSuccess}
+            SubmitSvg={Pencil}
+            placeholder="Angi et navn for denne varen"
+          />
+        </Wrapper>
       );
     }
 
     return (
-      <div className="item">
+      <Wrapper>
         <span>
           {item.name}
         </span>
@@ -46,7 +55,7 @@ class Item extends Component {
             <Pencil fill={isEditing ? 'grass' : 'white'} />
           </button>
         </span>
-      </div>
+      </Wrapper>
     );
   }
 }

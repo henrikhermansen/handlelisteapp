@@ -39,6 +39,7 @@
     height: 43px;
     cursor: pointer;
     svg {
+      fill: @white;
       stroke: @grass;
       stroke-opacity: .6;
       transition: stroke-opacity .1s ease-in;
@@ -54,10 +55,10 @@
         stroke-opacity: 1;
       }
     }
-    &.item__button--disabled {
+    &.item-input__button--disabled {
+      cursor: default;
       svg {
         opacity: .2;
-        cursor: default;
       }
     }
   }

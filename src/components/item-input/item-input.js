@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import Input from '../input/input';
-import Cross from '../svg/cross';
 import IsLoadingWrapper from '../is-loading-wrapper/is-loading-wrapper';
+import KeyCodes from '../../constants/key-codes';
+import { Cross } from '../svg';
 
 class ItemInput extends Component {
   static propTypes = {
@@ -22,6 +23,12 @@ class ItemInput extends Component {
     error: undefined,
   };
 
+  onKeyDown = (event) => {
+    if (event.which === KeyCodes.ENTER) {
+      this.onSubmit(this.props.onSubmit, this.props.onSuccess);
+    }
+  };
+
   onSubmit = (onSubmit, onSuccess) => {
     const value = this.state.value.trim();
     if (value) {
@@ -31,7 +38,7 @@ class ItemInput extends Component {
         .then(
           result =>
             this.setState({
-              isLoading: false, error: undefined,
+              value: '', isLoading: false, error: undefined,
             }, () => onSuccess(result)),
           error => this.setState({ isLoading: false, error }),
         ));
@@ -47,7 +54,7 @@ class ItemInput extends Component {
     } = this.props;
     const { value, isLoading, error } = this.state;
     return (
-      <div className="item">
+      <Fragment>
         <span>
           <Input
             {...props}
@@ -55,6 +62,7 @@ class ItemInput extends Component {
             onChange={
               event => this.setState({ value: event.target.value, error: undefined })
             }
+            onKeyDown={this.onKeyDown}
             focusOnMount
           />
         </span>
@@ -64,19 +72,19 @@ class ItemInput extends Component {
               onClick={() => this.onSubmit(onSubmit, onSuccess)}
               disabled={!value.trim()}
               className={classnames(
-                'item__button',
-                { 'item__button--disabled': !value.trim() },
+                'item-input__button',
+                { 'item-input__button--disabled': !value.trim() },
               )}
             >
               {
                 !error
-                  ? <SubmitSvg fill={isLoading ? 'grass' : 'white'} />
+                  ? <SubmitSvg />
                   : <Cross fill="dark-red" />
               }
             </button>
           </IsLoadingWrapper>
         </span>
-      </div>
+      </Fragment>
     );
   }
 }

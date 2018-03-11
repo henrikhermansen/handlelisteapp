@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import IsLoadingWrapper from '../is-loading-wrapper/is-loading-wrapper';
-import Cross from '../svg/cross';
 import Suggestions from '../suggestions/suggestions';
 import Input from '../input/input';
 import KeyCodes from '../../constants/key-codes';
+import { Cross } from '../svg';
 import { postBagItem } from '../../api/bag-items';
 
 import './add-bag-item.less';

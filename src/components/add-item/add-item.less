@@ -1,0 +1,22 @@
+@import '../item/item';
+
+.add-item {
+  .item;
+
+  button {
+    svg {
+      fill: @grass;
+      transition: fill .1s ease-in;
+    }
+    &:hover, &:focus {
+      svg {
+        fill: @dark-green;
+      }
+    }
+    &.item-input__button--disabled {
+      svg {
+        fill: @quick-silver;
+      }
+    }
+  }
+}

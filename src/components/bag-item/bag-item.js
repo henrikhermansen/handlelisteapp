@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-import Checkmark from '../svg/checkmark';
-import Cross from '../svg/cross';
 import IsLoadingWrapper from '../is-loading-wrapper/is-loading-wrapper';
+import { Checkmark, Cross } from '../svg';
 import { putBagItem } from '../../api/bag-items';
 
 import './bag-item.less';
