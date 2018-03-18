@@ -1,22 +1,36 @@
-@import '../item/item';
+@import '../add-bag-item/add-bag-item';
 
 .add-item {
-  .item;
+  .add-bag-item;
 
   button {
+    background: transparent;
+    border: 0;
+    outline: 0;
+    padding: 0;
+    width: 43px + 16px;
+    height: 43px;
+    cursor: pointer;
     svg {
-      fill: @grass;
-      transition: fill .1s ease-in;
+      fill: @dark-green;
+      stroke: @white;
+      stroke-opacity: .3;
+      transition: stroke .1s ease-in;
     }
-    &:hover, &:focus {
+    &:hover {
       svg {
-        fill: @dark-green;
+        stroke: @grass;
+      }
+    }
+    &:focus {
+      svg {
+        stroke: @grass;
+        stroke-opacity: 1;
       }
     }
     &.item-input__button--disabled {
-      svg {
-        fill: @quick-silver;
-      }
+      opacity: .2;
+      cursor: default;
     }
   }
 }
