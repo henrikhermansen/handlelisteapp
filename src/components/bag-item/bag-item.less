@@ -8,6 +8,7 @@
   line-height: @line-height;
   border-bottom: 1px dotted @cool-green;
   overflow: hidden;
+  background: @white;
 
   > span {
     &:first-child {
@@ -23,7 +24,7 @@
         margin: 9px auto;
       }
     }
-    background: @white;
+    background: transparent;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -58,5 +59,6 @@
 
   &--purchased {
     color: @quick-silver;
+    opacity: .6;
   }
 }

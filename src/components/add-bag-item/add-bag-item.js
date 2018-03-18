@@ -6,7 +6,7 @@ import IsLoadingWrapper from '../is-loading-wrapper/is-loading-wrapper';
 import Suggestions from '../suggestions/suggestions';
 import Input from '../input/input';
 import KeyCodes from '../../constants/key-codes';
-import { Cross } from '../svg';
+import { Plus, Cross } from '../svg';
 import { postBagItem } from '../../api/bag-items';
 
 import './add-bag-item.less';
@@ -47,9 +47,11 @@ class AddBagItem extends Component {
     }
   };
 
-  itemFromValue = () => this.props.items.find(item => item.name === this.state.value);
+  itemFromValue = () =>
+    this.props.items.find(item => item.name.toLowerCase() === this.state.value.toLowerCase());
 
   render() {
+    const { error } = this.state;
     return (
       <IsLoadingWrapper isLoading={this.props.isLoading || this.state.isLoading}>
         <div className="add-bag-item">
@@ -67,11 +69,14 @@ class AddBagItem extends Component {
               tabIndex={this.itemFromValue() ? '0' : '-1'}
               className={classnames(
                 'add-bag-item__button',
-                { 'add-bag-item__button--rotated': !this.state.error },
                 { 'add-bag-item__button--disabled': !this.itemFromValue() },
               )}
             >
-              <Cross fill={this.state.error ? 'dark-red' : 'dark-green'} />
+              {
+                !error
+                  ? <Plus fill="dark-green" />
+                  : <Cross fill="dark-red" />
+              }
             </button>
           </span>
           <Suggestions
