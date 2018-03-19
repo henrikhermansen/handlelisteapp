@@ -1,11 +1,19 @@
 import XHR from './xhr';
+import firebase from './firebase';
 
-const uri = '/api/bagItems';
+let API;
+if (process.env.NODE_ENV === 'development') {
+  API = XHR;
+} else {
+  API = firebase;
+}
+
+const uri = 'bagItems';
 
 const uriWithId = bagItemId => `${uri}/${bagItemId}`;
 
-export const getBagItems = () => XHR.get(uri);
+export const getBagItems = () => API.get(uri);
 
-export const postBagItem = bagItem => XHR.post(uri, bagItem);
+export const postBagItem = bagItem => API.post(uri, bagItem);
 
-export const putBagItem = bagItem => XHR.put(uriWithId(bagItem.id), bagItem);
+export const putBagItem = bagItem => API.put(uriWithId(bagItem.id), bagItem);

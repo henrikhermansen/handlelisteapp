@@ -1,7 +1,7 @@
 import xhr from 'xhr';
 
 const xhrPromise = (uri, options = {}) => new Promise((resolve, reject) => xhr(
-  uri,
+  `api/${uri}`,
   {
     json: true,
     timeout: 5000,
