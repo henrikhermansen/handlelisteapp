@@ -8,8 +8,8 @@
     "npm": "5.6.0"
   },
   "scripts": {
-    "build": "webpack --config webpack.config.prod.js",
-    "build:dev": "webpack --config webpack.config.dev.js",
+    "build": "webpack --config webpack.config.prod.js --progress",
+    "build:dev": "webpack --config webpack.config.dev.js --progress",
     "lint": "eslint 'src/**/*@(.js|.jsx)' *.js",
     "lint:fix": "eslint 'src/**/*@(.js|.jsx)' *.js --fix",
     "heroku-postbuild": "npm run build",
