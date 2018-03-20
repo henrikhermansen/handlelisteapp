@@ -5,7 +5,7 @@ export const FETCH_BAG_ITEMS_FAILED = 'FETCH_BAG_ITEMS_FAILED';
 export const UPDATE_BAG_ITEM = 'UPDATE_BAG_ITEM';
 export const ADD_BAG_ITEM = 'ADD_BAG_ITEM';
 
-export const fetchBagItems = () => ({ type: FETCH_BAG_ITEMS });
+export const fetchBagItems = dispatch => ({ type: FETCH_BAG_ITEMS, dispatch });
 
 export const fetchBagItemsSuccess = bagItems => ({ type: FETCH_BAG_ITEMS_SUCCESS, bagItems });
 
