@@ -5,7 +5,7 @@ export const FETCH_ITEMS_FAILED = 'FETCH_ITEMS_FAILED';
 export const UPDATE_ITEM = 'UPDATE_ITEM';
 export const ADD_ITEM = 'ADD_ITEM';
 
-export const fetchItems = () => ({ type: FETCH_ITEMS });
+export const fetchItems = dispatch => ({ type: FETCH_ITEMS, dispatch });
 
 export const fetchItemsSuccess = items => ({ type: FETCH_ITEMS_SUCCESS, items });
 

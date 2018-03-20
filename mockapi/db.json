@@ -1,40 +1,40 @@
 {
   "items": [
     {
-      "id": 0,
+      "id": "0",
       "name": "Melk"
     },
     {
-      "id": 1,
+      "id": "1",
       "name": "Laks"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Quinoa"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Bukettblanding"
     }
   ],
   "bagItems": [
     {
-      "id": 0,
+      "id": "0",
       "added": "2018-02-13T21:33:41.071Z",
       "purchased": false,
-      "itemId": 0
+      "itemId": "0"
     },
     {
-      "id": 1,
+      "id": "1",
       "added": "2018-02-13T21:34:51.071Z",
       "purchased": false,
-      "itemId": 1
+      "itemId": "1"
     },
     {
-      "id": 2,
+      "id": "2",
       "added": "2018-02-13T21:35:51.071Z",
       "purchased": false,
-      "itemId": 3
+      "itemId": "3"
     }
   ]
 }

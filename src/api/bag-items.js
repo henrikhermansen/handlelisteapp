@@ -12,7 +12,7 @@ const uri = 'bagItems';
 
 const uriWithId = bagItemId => `${uri}/${bagItemId}`;
 
-export const getBagItems = () => API.get(uri);
+export const getBagItems = firebaseCallback => API.get(uri, firebaseCallback);
 
 export const postBagItem = bagItem => API.post(uri, bagItem);
 

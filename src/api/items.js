@@ -12,7 +12,7 @@ const uri = 'items';
 
 const uriWithId = itemId => `${uri}/${itemId}`;
 
-export const getItems = () => API.get(uri);
+export const getItems = firebaseCallback => API.get(uri, firebaseCallback);
 
 export const postItem = item => API.post(uri, item);
 

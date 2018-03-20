@@ -4,10 +4,10 @@ import { INITIALIZE_REQUEST, initializeError, initializeSuccess } from '../actio
 import { fetchBagItems } from '../actions/bag-items';
 import { fetchItems } from '../actions/items';
 
-function* initializationRequest() {
+function* initializationRequest({ dispatch }) {
   try {
-    yield put(fetchBagItems());
-    yield put(fetchItems());
+    yield put(fetchBagItems(dispatch));
+    yield put(fetchItems(dispatch));
     yield put(initializeSuccess());
   } catch (e) {
     yield put(initializeError(e));
