@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import BagItem from '../bag-item/bag-item';
-import IsLoadingWrapper from '../is-loading-wrapper/is-loading-wrapper';
+import BagItem from '../../components/bag-item/bag-item';
+import IsLoadingWrapper from '../../components/is-loading-wrapper/is-loading-wrapper';
 
 import './shopping-bag.less';
 

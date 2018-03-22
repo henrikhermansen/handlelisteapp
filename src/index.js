@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 
-import App from './components/app';
+import App from './containers/app';
 import ErrorBoundary from './components/error-boundary/error-boundary';
 import createStore from './store-setup';
 
