@@ -4,7 +4,9 @@ import classnames from 'classnames';
 
 import IsLoadingWrapper from '../is-loading-wrapper/is-loading-wrapper';
 import { Checkmark, Cross } from '../svg';
-import { putBagItem } from '../../api/bag-items';
+
+import { set } from '../../api/firebase/database';
+import { BAG_ITEMS } from '../../api/firebase/refs';
 
 import './bag-item.less';
 
@@ -12,7 +14,6 @@ class BagItem extends Component {
   static propTypes = {
     bagItem: PropTypes.object.isRequired,
     itemName: PropTypes.string.isRequired,
-    updateBagItem: PropTypes.func.isRequired,
   };
 
   state = {
@@ -21,17 +22,14 @@ class BagItem extends Component {
   };
 
   togglePurchasedStatus = () => {
-    const { bagItem, updateBagItem } = this.props;
+    const { bagItem } = this.props;
     this.setState({
       isLoading: true,
-    }, () => putBagItem({
+    }, () => set(`${BAG_ITEMS}/${bagItem.key}`, {
       ...bagItem,
       purchased: bagItem.purchased ? false : new Date().toJSON(),
     }).then(
-      updatedBagItem => this.setState(
-        { isLoading: false, error: undefined },
-        () => updateBagItem(updatedBagItem),
-      ),
+      () => this.setState({ isLoading: false, error: undefined }),
       error => this.setState({ isLoading: false, error }),
     ));
   };

@@ -7,15 +7,15 @@ import Suggestions from '../suggestions/suggestions';
 import Input from '../input/input';
 import KeyCodes from '../../constants/key-codes';
 import { Plus, Cross } from '../svg';
-import { postBagItem } from '../../api/bag-items';
+
+import { pushSet } from '../../api/firebase/database';
+import { BAG_ITEMS } from '../../api/firebase/refs';
 
 import './add-bag-item.less';
 
 class AddBagItem extends Component {
   static propTypes = {
-    isLoading: PropTypes.bool.isRequired,
     items: PropTypes.array.isRequired,
-    addBagItem: PropTypes.func.isRequired,
   };
 
   state = {
@@ -35,13 +35,11 @@ class AddBagItem extends Component {
     if (item) {
       this.setState({
         isLoading: true,
-      }, () => postBagItem({
+      }, () => pushSet(BAG_ITEMS, {
         added: new Date().toJSON(),
-        itemId: item.id,
+        itemKey: item.key,
       }).then(
-        newItem => this.setState({
-          value: '', isLoading: false, error: undefined,
-        }, () => this.props.addBagItem(newItem)),
+        () => this.setState({ value: '', isLoading: false, error: undefined }),
         error => this.setState({ isLoading: false, error }),
       ));
     }
@@ -53,7 +51,7 @@ class AddBagItem extends Component {
   render() {
     const { error } = this.state;
     return (
-      <IsLoadingWrapper isLoading={this.props.isLoading || this.state.isLoading}>
+      <IsLoadingWrapper isLoading={this.state.isLoading}>
         <div className="add-bag-item">
           <span>
             <Input

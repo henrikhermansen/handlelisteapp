@@ -1,7 +1,10 @@
-import { connect } from 'react-redux';
+import React from 'react';
 
 import ShoppingBag from './shopping-bag';
-import { updateBagItem } from '../../actions/bag-items';
+
+import FirebaseData from '../../api/components/firebase-data';
+import { BAG_ITEMS } from '../../api/firebase/refs';
+import { mapFirebaseObjectToArray } from '../../api/firebase/database';
 
 const todayDateString = new Date().toLocaleDateString();
 const filterNonPurchasedOrPurchasedToday = bagItem =>
@@ -9,16 +12,18 @@ const filterNonPurchasedOrPurchasedToday = bagItem =>
 
 const sortByDateAdded = (a, b) => a.added.localeCompare(b.added);
 
-const mapStateToProps = state => ({
-  isLoading: state.bagItems.isLoading || state.items.isLoading,
-  items: state.items.items,
-  bagItems: state.bagItems.bagItems
-    .filter(filterNonPurchasedOrPurchasedToday)
-    .sort(sortByDateAdded),
-});
-
-const mapDispatchToProps = dispatch => ({
-  updateBagItem: item => dispatch(updateBagItem(item)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ShoppingBag);
+export default () => (
+  <FirebaseData ref={BAG_ITEMS}>
+    {
+      data => (
+        <ShoppingBag
+          bagItems={
+            mapFirebaseObjectToArray(data)
+              .filter(filterNonPurchasedOrPurchasedToday())
+              .sort(sortByDateAdded)
+          }
+        />
+      )
+    }
+  </FirebaseData>
+);

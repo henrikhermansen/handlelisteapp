@@ -3,23 +3,22 @@ import PropTypes from 'prop-types';
 
 import { Pencil } from '../svg';
 import ItemInput from '../item-input/item-input';
-import { putItem } from '../../api/items';
+
+import { set } from '../../api/firebase/database';
+import { ITEMS } from '../../api/firebase/refs';
 
 import './item.less';
 
 class Item extends Component {
   static propTypes = {
     item: PropTypes.object.isRequired,
-    updateItem: PropTypes.func.isRequired,
   };
 
   state = { isEditing: false };
 
-  onSubmit = name => putItem({ ...this.props.item, name });
+  onSubmit = name => set(`${ITEMS}/${this.props.item.key}`, { ...this.props.item, name });
 
-  onSuccess = item =>
-    this.setState({ isEditing: !this.state.isEditing }, () =>
-      this.props.updateItem(item));
+  onSuccess = () => this.setState({ isEditing: !this.state.isEditing });
 
   render() {
     const { item } = this.props;
