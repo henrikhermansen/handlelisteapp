@@ -1,42 +1,31 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
+import { array } from 'prop-types';
 
-import Item from '../../components/item/item';
-import AddItem from '../../components/add-item/add-item';
-import IsLoadingWrapper from '../../components/is-loading-wrapper/is-loading-wrapper';
+import Item from '../../components/item';
+import AddItem from '../../components/add-item';
 
 import './assortment.less';
 
-const Assortment = ({
-  isLoading,
-  items,
-  updateItem,
-  addItem,
-}) => (
-  <IsLoadingWrapper isLoading={isLoading} large>
+const Assortment = ({ items }) => (
+  <Fragment>
     <AddItem
-      addItem={addItem}
       items={items}
     />
     <div className="assortment">
       {
       items.map(item => (
         <Item
-          key={item.id}
+          key={item.key}
           item={item}
-          updateItem={updateItem}
         />
       ))
     }
     </div>
-  </IsLoadingWrapper>
+  </Fragment>
 );
 
 Assortment.propTypes = {
-  isLoading: PropTypes.bool.isRequired,
-  items: PropTypes.array.isRequired,
-  updateItem: PropTypes.func.isRequired,
-  addItem: PropTypes.func.isRequired,
+  items: array.isRequired,
 };
 
 export default Assortment;

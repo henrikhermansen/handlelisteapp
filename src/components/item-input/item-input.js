@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
@@ -11,11 +11,14 @@ class ItemInput extends Component {
   static propTypes = {
     value: PropTypes.string,
     onSubmit: PropTypes.func.isRequired,
-    onSuccess: PropTypes.func.isRequired,
+    onSuccess: PropTypes.func,
     SubmitSvg: PropTypes.func.isRequired,
   };
 
-  static defaultProps = { value: '' };
+  static defaultProps = {
+    value: '',
+    onSuccess: () => {},
+  };
 
   state = {
     value: this.props.value,
@@ -36,10 +39,10 @@ class ItemInput extends Component {
         isLoading: true,
       }, () => onSubmit(value)
         .then(
-          result =>
+          () =>
             this.setState({
               value: '', isLoading: false, error: undefined,
-            }, () => onSuccess(result)),
+            }, onSuccess),
           error => this.setState({ isLoading: false, error }),
         ));
     }
@@ -54,7 +57,7 @@ class ItemInput extends Component {
     } = this.props;
     const { value, isLoading, error } = this.state;
     return (
-      <Fragment>
+      <div className="item">
         <span>
           <Input
             {...props}
@@ -84,7 +87,7 @@ class ItemInput extends Component {
             </button>
           </IsLoadingWrapper>
         </span>
-      </Fragment>
+      </div>
     );
   }
 }

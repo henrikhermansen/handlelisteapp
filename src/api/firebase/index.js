@@ -1,28 +1,14 @@
-const database = firebase.database();
+import firebase from 'firebase/app';
+import 'firebase/database';
 
-const fbOn = (ref, callback) => {
-  database.ref(ref).on('value', snapshot => callback(snapshot.val()));
-};
-
-const fbSet = (ref, _item) => new Promise((resolve) => {
-  const item = { ..._item };
-  delete item.id;
-  database.ref(ref).set(item);
-  resolve(_item);
+firebase.initializeApp({
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_DATABASE_URL,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.APP_MESSAGING_SENDER_ID,
 });
 
-const fbPushSet = (ref, _item) => new Promise((resolve) => {
-  const newId = database.ref(ref).push().key;
-  const item = {
-    id: newId,
-    ..._item,
-  };
-  fbSet(`${ref}/${newId}`, item)
-    .then(() => resolve(item));
-});
-
-export default {
-  get: (ref, callback) => fbOn(ref, callback),
-  post: (ref, item) => fbPushSet(ref, item),
-  put: (ref, item) => fbSet(ref, item),
-};
+export const auth = firebase.auth();
+export const database = firebase.database();
