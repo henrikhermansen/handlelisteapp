@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Item from '../item/item';
-import AddItem from '../add-item/add-item';
-import IsLoadingWrapper from '../is-loading-wrapper/is-loading-wrapper';
+import Item from '../../components/item/item';
+import AddItem from '../../components/add-item/add-item';
+import IsLoadingWrapper from '../../components/is-loading-wrapper/is-loading-wrapper';
 
 import './assortment.less';
 

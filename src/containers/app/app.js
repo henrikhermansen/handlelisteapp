@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import Navigation from '../navigation/navigation';
-import NotFound from '../not-found/not-found';
-import Shopping from '../shopping/shopping';
-import Assortment from '../assortment';
+import Navigation from '../../components/navigation/navigation';
+import NotFound from '../../components/not-found/not-found';
+import Shopping from '../../components/shopping/shopping';
+import Assortment from '../assortment/index';
 import * as paths from '../../constants/paths';
 
 import './app.less';
-import IsLoadingWrapper from '../is-loading-wrapper/is-loading-wrapper';
+import IsLoadingWrapper from '../../components/is-loading-wrapper/is-loading-wrapper';
 
 class App extends Component {
   static propTypes = {
