@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const rootConfig = require('./webpack.config');
+const DotenvPlugin = require('dotenv-webpack');
 
 const strategy = {
   entry: 'prepend',
@@ -21,6 +22,7 @@ const config = {
         NODE_ENV: JSON.stringify('development'),
       },
     }),
+    new DotenvPlugin({ path: './.env.development' }),
   ],
   devServer: {
     contentBase: path.join(__dirname, 'public'),
