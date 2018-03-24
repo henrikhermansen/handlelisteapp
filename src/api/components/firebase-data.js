@@ -6,29 +6,33 @@ import { on, off } from '../firebase/database';
 
 export default class FirebaseData extends Component {
   static propTypes = {
-    ref: string.isRequired,
+    dbRef: string.isRequired,
     children: func.isRequired,
   };
 
-  state = { data: undefined };
+  state = { data: undefined, isFetched: false };
 
   componentDidMount() {
-    on(this.props.ref, this.receiveData);
+    on(this.props.dbRef, this.receiveData);
   }
 
   componentWillUnmount() {
-    off(this.props.ref);
+    off(this.props.dbRef);
   }
 
-  receiveData = data => this.setState({ data });
+  receiveData = data => this.setState({ data, isFetched: true });
 
   render() {
     const { children } = this.props;
-    const { data } = this.state;
+    const { data, isFetched } = this.state;
+
+    if (isFetched && !data) {
+      console.warn('Data is fetched, but data is falsy: ', data);
+    }
 
     return (
-      <IsLoadingWrapper isLoading={!data} large>
-        { children(data) }
+      <IsLoadingWrapper isLoading={!isFetched} large>
+        { () => children(data) }
       </IsLoadingWrapper>
     );
   }

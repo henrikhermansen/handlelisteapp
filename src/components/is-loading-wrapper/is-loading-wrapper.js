@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { bool, func, node, oneOfType } from 'prop-types';
 
 import Spinner from '../spinner/spinner';
 
@@ -8,19 +8,20 @@ const IsLoadingWrapper = ({
   large,
   inline,
   children,
-}) => (
-  isLoading
-    ? (
-      <Spinner {...large} {...inline} />
-    )
-    : children
-);
+}) => {
+  if (isLoading) {
+    return <Spinner {...large} {...inline} />;
+  } if (typeof children === 'function') {
+    return children();
+  }
+  return children;
+};
 
 IsLoadingWrapper.propTypes = {
-  isLoading: PropTypes.bool.isRequired,
-  large: PropTypes.bool,
-  inline: PropTypes.bool,
-  children: PropTypes.node.isRequired,
+  isLoading: bool.isRequired,
+  large: bool,
+  inline: bool,
+  children: oneOfType([func, node]).isRequired,
 };
 
 IsLoadingWrapper.defaultProps = {

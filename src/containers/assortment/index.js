@@ -9,7 +9,7 @@ import { mapFirebaseObjectToArray } from '../../api/firebase/database';
 const sortByName = (a, b) => a.name.localeCompare(b.name);
 
 export default () => (
-  <FirebaseData ref={ITEMS}>
+  <FirebaseData dbRef={ITEMS}>
     {
       data => (
         <Assortment

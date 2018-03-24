@@ -7,7 +7,7 @@ import FirebaseData from '../../api/components/firebase-data';
 import { ITEMS } from '../../api/firebase/refs';
 
 const RenderedComponent = ({ bagItem }) => (
-  <FirebaseData ref={`${ITEMS}/${bagItem.itemKey}`}>
+  <FirebaseData dbRef={`${ITEMS}/${bagItem.itemKey}`}>
     {
       item => (
         <BagItem

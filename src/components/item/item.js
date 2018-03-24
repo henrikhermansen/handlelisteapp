@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { Pencil } from '../svg';
-import ItemInput from '../item-input/item-input';
+import ItemInput from '../item-input';
 
 import { set } from '../../api/firebase/database';
 import { ITEMS } from '../../api/firebase/refs';
@@ -16,9 +16,9 @@ class Item extends Component {
 
   state = { isEditing: false };
 
-  onSubmit = name => set(`${ITEMS}/${this.props.item.key}`, { ...this.props.item, name });
-
-  onSuccess = () => this.setState({ isEditing: !this.state.isEditing });
+  onSubmit = name =>
+    set(`${ITEMS}/${this.props.item.key}`, { ...this.props.item, name })
+      .then(() => this.setState({ isEditing: !this.state.isEditing }));
 
   render() {
     const { item } = this.props;
@@ -36,7 +36,6 @@ class Item extends Component {
           <ItemInput
             value={item.name}
             onSubmit={this.onSubmit}
-            onSuccess={this.onSuccess}
             SubmitSvg={Pencil}
             placeholder="Angi et navn for denne varen"
           />
