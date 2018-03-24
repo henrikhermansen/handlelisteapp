@@ -13,13 +13,13 @@ const filterNonPurchasedOrPurchasedToday = bagItem =>
 const sortByDateAdded = (a, b) => a.added.localeCompare(b.added);
 
 export default () => (
-  <FirebaseData ref={BAG_ITEMS}>
+  <FirebaseData dbRef={BAG_ITEMS}>
     {
       data => (
         <ShoppingBag
           bagItems={
             mapFirebaseObjectToArray(data)
-              .filter(filterNonPurchasedOrPurchasedToday())
+              .filter(filterNonPurchasedOrPurchasedToday)
               .sort(sortByDateAdded)
           }
         />

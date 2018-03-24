@@ -11,13 +11,11 @@ class ItemInput extends Component {
   static propTypes = {
     value: PropTypes.string,
     onSubmit: PropTypes.func.isRequired,
-    onSuccess: PropTypes.func,
     SubmitSvg: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
     value: '',
-    onSuccess: () => {},
   };
 
   state = {
@@ -28,30 +26,22 @@ class ItemInput extends Component {
 
   onKeyDown = (event) => {
     if (event.which === KeyCodes.ENTER) {
-      this.onSubmit(this.props.onSubmit, this.props.onSuccess);
+      this.onSubmit(this.props.onSubmit);
     }
   };
 
-  onSubmit = (onSubmit, onSuccess) => {
+  onSubmit = (onSubmit) => {
     const value = this.state.value.trim();
     if (value) {
       this.setState({
         isLoading: true,
-      }, () => onSubmit(value)
-        .then(
-          () =>
-            this.setState({
-              value: '', isLoading: false, error: undefined,
-            }, onSuccess),
-          error => this.setState({ isLoading: false, error }),
-        ));
+      }, () => onSubmit(value));
     }
   };
 
   render() {
     const {
       onSubmit,
-      onSuccess,
       SubmitSvg,
       ...props
     } = this.props;
@@ -72,7 +62,7 @@ class ItemInput extends Component {
         <span>
           <IsLoadingWrapper isLoading={isLoading} inline>
             <button
-              onClick={() => this.onSubmit(onSubmit, onSuccess)}
+              onClick={() => this.onSubmit(onSubmit)}
               disabled={!value.trim()}
               className={classnames(
                 'item-input__button',
