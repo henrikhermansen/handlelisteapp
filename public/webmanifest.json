@@ -1,0 +1,19 @@
+{
+  "name": "Handlelisteapp",
+  "short_name": "Handleliste",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png?v=qA3vNbr4vj",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png?v=qA3vNbr4vj",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#46a020",
+  "background_color": "#a0a0a0",
+  "display": "standalone"
+}
