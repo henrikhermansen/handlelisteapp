@@ -23,11 +23,11 @@ export default class FirebaseData extends Component {
   receiveData = data => this.setState({ data, isFetched: true });
 
   render() {
-    const { children } = this.props;
+    const { dbRef, children } = this.props;
     const { data, isFetched } = this.state;
 
     if (isFetched && !data) {
-      console.warn('Data is fetched, but data is falsy: ', data);
+      console.warn(dbRef, 'is fetched, but is falsy:', data);
     }
 
     return (

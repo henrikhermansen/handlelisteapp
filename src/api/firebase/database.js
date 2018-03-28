@@ -26,6 +26,9 @@ export const pushSet = (ref, _item) => new Promise((resolve) => {
 });
 
 export function mapFirebaseObjectToArray(fbObject) {
+  if (!fbObject) {
+    return [];
+  }
   const keys = Object.keys(fbObject);
   return keys.map(key => ({
     key,
