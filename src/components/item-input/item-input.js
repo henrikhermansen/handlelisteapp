@@ -25,26 +25,25 @@ class ItemInput extends Component {
   };
 
   onKeyDown = (event) => {
-    if (event.which === KeyCodes.ENTER) {
-      this.onSubmit(this.props.onSubmit);
+    if (event.which === KeyCodes.ENTER && !this.state.isLoading) {
+      this.onSubmit();
     }
   };
 
-  onSubmit = (onSubmit) => {
+  onSubmit = () => {
     const value = this.state.value.trim();
     if (value) {
       this.setState({
         isLoading: true,
-      }, () => onSubmit(value));
+      }, () => this.props.onSubmit(value).then(
+        () => this.setState({ value: '', isLoading: false, error: undefined }),
+        error => this.setState({ isLoading: false, error }),
+      ));
     }
   };
 
   render() {
-    const {
-      onSubmit,
-      SubmitSvg,
-      ...props
-    } = this.props;
+    const { SubmitSvg, ...props } = this.props;
     const { value, isLoading, error } = this.state;
     return (
       <div className="item">
@@ -62,7 +61,7 @@ class ItemInput extends Component {
         <span>
           <IsLoadingWrapper isLoading={isLoading} inline>
             <button
-              onClick={() => this.onSubmit(onSubmit)}
+              onClick={this.onSubmit}
               disabled={!value.trim()}
               className={classnames(
                 'item-input__button',
