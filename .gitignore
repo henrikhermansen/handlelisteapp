@@ -3,7 +3,8 @@
 npm-debug.log
 
 # Build files
-public/build
+dist
+.cache
 
 # IntelliJ IDEA
 .idea
