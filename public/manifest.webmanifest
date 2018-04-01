@@ -3,12 +3,12 @@
   "short_name": "Handleliste",
   "icons": [
     {
-      "src": "/android-chrome-192x192.png?v=qA3vNbr4vj",
+      "src": "./android-chrome-192x192.png?v=qA3vNbr4vj",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/android-chrome-512x512.png?v=qA3vNbr4vj",
+      "src": "./android-chrome-512x512.png?v=qA3vNbr4vj",
       "sizes": "512x512",
       "type": "image/png"
     }
