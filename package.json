@@ -4,47 +4,29 @@
   "license": "WTFPL",
   "main": "public/index.html",
   "engines": {
-    "node": "8.9.4",
-    "npm": "5.6.0"
+    "node": "10.13.0",
+    "npm": "6.9.0"
   },
   "scripts": {
     "build": "rimraf dist/* && parcel build public/index.html",
-    "lint": "eslint 'src/**/*@(.js|.jsx)' *.js",
-    "lint:fix": "eslint 'src/**/*@(.js|.jsx)' *.js --fix",
     "start": "parcel public/index.html",
     "test": ""
   },
-  "pre-commit": [
-    "lint:fix"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/henrikhermansen/handlelisteapp/"
   },
   "dependencies": {
-    "babel-polyfill": "^6.26.0",
-    "classnames": "^2.2.5",
-    "firebase": "^4.12.1",
-    "prop-types": "^15.6.1",
-    "react": "^16.3.0",
-    "react-dom": "^16.3.0",
-    "react-router-dom": "^4.2.2"
+    "firebase": "^6.0.2",
+    "svelte": "^3.4.1"
   },
   "devDependencies": {
-    "babel-core": "^6.24.1",
-    "babel-eslint": "^8.2.2",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.5.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-runtime": "^6.20.0",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-import": "^2.10.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.7.0",
-    "parcel-bundler": "^1.7.0",
+    "parcel-bundler": "^1.12.3",
+    "parcel-plugin-svelte": "^3.0.1",
     "pre-commit": "^1.2.2",
-    "rimraf": "^2.6.2"
-  }
+    "rimraf": "^2.6.3"
+  },
+  "browserslist": [
+    "last 1 chrome versions"
+  ]
 }
