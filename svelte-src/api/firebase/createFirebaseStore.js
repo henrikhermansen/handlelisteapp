@@ -1,19 +1,24 @@
 import { database } from './index';
-import { mapFirebaseObjectToArray } from '../../util';
 
 const createFirebaseStore = ref => {
-  let items = [];
+  let callbacks = new Set();
+
+  database.ref(ref).on('value', snapshot => {
+    const value = snapshot.val();
+    localStorage.setItem(`handleliste-${ref}`, JSON.stringify(value));
+    callbacks.forEach(cb => cb(value));
+  });
 
   const subscribe = cb => {
-    cb(items);
-    database.ref(ref).on('value', snapshot => {
-      items = mapFirebaseObjectToArray(snapshot.val());
-      cb(items);
-    });
+    try {
+      cb(JSON.parse(localStorage.getItem(`handleliste-${ref}`)));
+    } catch {
+      cb({});
+    }
 
-    return () => {
-      database.ref(ref).off();
-    };
+    callbacks.add(cb);
+
+    return () => callbacks.delete(cb);
   };
 
   return { subscribe };
