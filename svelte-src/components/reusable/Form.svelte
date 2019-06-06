@@ -2,15 +2,30 @@
   import { createEventDispatcher } from 'svelte';
   import { slide } from 'svelte/transition';
 
-  let showForm = true; // flip me
+  export let onSubmit, submittable;
+
+  let showForm, submitting, error;
   const toggleShowForm = () => showForm = !showForm;
   $: buttonText = showForm ? 'Avbryt' : 'Legg til';
 
   const dispatch = createEventDispatcher();
-  const onSubmit = () => {
-    dispatch('submit');
-    toggleShowForm();
+  const handleSubmit = async () => {
+    error = null;
+    submitting = true;
+    try {
+      await onSubmit();
+      toggleShowForm();
+    } catch (e) {
+      error = e;
+    } finally {
+      submitting = false;
+    }
   };
+  const handleCancel = () => {
+    dispatch('formcancel');
+    error = null;
+    toggleShowForm();
+  }
 </script>
 
 <style>
@@ -34,7 +49,7 @@
     .buttons {
         display: flex;
         justify-content: space-evenly;
-        margin-top: 1em;
+        margin-top: .5em;
     }
 
     .buttons button {
@@ -49,12 +64,18 @@
         box-shadow: 0 1px 2px 1px rgba(0, 0, 0, .05);
     }
 
-    button:hover, button:focus, div :global(input:hover, input:focus) {
-        border-color: #46a020 !important;
+    .submit {
+        background: transparent;
+        transition: background .2s cubic-bezier(.25, .1, .25, 1);
+    }
+
+    .submit.submittable {
+        background: #e9f9e1;
     }
 
     div :global(input) {
         width: 100%;
+        margin-bottom: .5em;
     }
 </style>
 
@@ -63,9 +84,19 @@
     <div transition:slide class="form">
         <slot></slot>
         <div class="buttons">
-            <button on:click={onSubmit}>Legg til</button>
-            <button on:click={toggleShowForm}>Avbryt</button>
+            <button
+                    on:click={handleSubmit}
+                    class="submit"
+                    class:submittable
+                    disabled={!submittable || submitting}
+            >
+                Legg til
+            </button>
+            <button on:click={handleCancel}>Avbryt</button>
         </div>
+        {#if error}
+        En feil oppsto: {error}
+        {/if}
     </div>
     {:else}
     <button transition:slide on:click={toggleShowForm} class="toggle">{buttonText}</button>

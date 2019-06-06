@@ -1,5 +1,5 @@
-import { createFirebaseStore } from '../api/firebase';
+import { BAG_ITEMS, createFirebaseStore } from '../api/firebase';
 
-const bagItems = createFirebaseStore('bagItems');
+const bagItems = createFirebaseStore(BAG_ITEMS);
 
 export default bagItems;

@@ -11,7 +11,8 @@
     "build": "rimraf dist/* && parcel build public/index.html",
     "start": "parcel public/index.html --no-cache --no-hmr",
     "test": "",
-    "postinstall": "rimraf node_modules/svelte/*.mjs"
+    "postinstall": "rimraf node_modules/svelte/*.mjs",
+    "postupgrade": "rimraf node_modules/svelte/*.mjs"
   },
   "repository": {
     "type": "git",
@@ -19,7 +20,7 @@
   },
   "dependencies": {
     "firebase": "^6.1.0",
-    "svelte": "^3.4.4"
+    "svelte": "3.4.2"
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.3",

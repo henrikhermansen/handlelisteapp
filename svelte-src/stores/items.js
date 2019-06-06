@@ -1,5 +1,5 @@
-import { createFirebaseStore } from '../api/firebase';
+import { ITEMS, createFirebaseStore } from '../api/firebase';
 
-const items = createFirebaseStore('items');
+const items = createFirebaseStore(ITEMS);
 
 export default items;

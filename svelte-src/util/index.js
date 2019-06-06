@@ -1,1 +1,1 @@
-export { default as mapFirebaseObjectToArray } from './mapFirebaseObjectToArray';
+export { default as makeBagItem } from './makeBagItem';

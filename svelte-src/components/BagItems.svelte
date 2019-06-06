@@ -18,31 +18,4 @@
     {#each bagItemEntries as [id, bagItem] (id) }
     <BagItem bagItem={bagItem} />
     {/each}
-    {#each bagItemEntries as [id, bagItem] (id) }
-    <BagItem bagItem={bagItem} />
-    {/each}
-    {#each bagItemEntries as [id, bagItem] (id) }
-    <BagItem bagItem={bagItem} />
-    {/each}
-    {#each bagItemEntries as [id, bagItem] (id) }
-    <BagItem bagItem={bagItem} />
-    {/each}
-    {#each bagItemEntries as [id, bagItem] (id) }
-    <BagItem bagItem={bagItem} />
-    {/each}
-    {#each bagItemEntries as [id, bagItem] (id) }
-    <BagItem bagItem={bagItem} />
-    {/each}
-    {#each bagItemEntries as [id, bagItem] (id) }
-    <BagItem bagItem={bagItem} />
-    {/each}
-    {#each bagItemEntries as [id, bagItem] (id) }
-    <BagItem bagItem={bagItem} />
-    {/each}
-    {#each bagItemEntries as [id, bagItem] (id) }
-    <BagItem bagItem={bagItem} />
-    {/each}
-    {#each bagItemEntries as [id, bagItem] (id) }
-    <BagItem bagItem={bagItem} />
-    {/each}
 </List>
