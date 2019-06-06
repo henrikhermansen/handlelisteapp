@@ -1,10 +1,10 @@
-import { database } from './index';
+import database from './database';
 
 const createFirebaseStore = ref => {
   let callbacks = new Set();
 
   database.ref(ref).on('value', snapshot => {
-    const value = snapshot.val();
+    const value = snapshot.val() || {};
     localStorage.setItem(`handleliste-${ref}`, JSON.stringify(value));
     callbacks.forEach(cb => cb(value));
   });

@@ -28,12 +28,17 @@
         box-shadow: 0 0 0 1px #ffffff, 0 0 0 3px #e9f9e1 !important;
     }
 
+    :global(button:hover),
+    :global(button:focus),
+    :global(input:hover, input:focus) {
+        border-color: #46a020 !important;
+    }
+
     .outer {
         max-width: 768px;
         margin: 0 auto;
         height: calc(100vh - 2.5em);
         position: relative;
-        overflow: hidden;
     }
 
     .outer:after {
