@@ -34,38 +34,38 @@
 </script>
 
 <style>
-    button {
-        display: block;
-        padding: .2em .4em;
-        margin: .6em auto 1.2em;
-        border: 0;
-        border-radius: 3px;
-        background: transparent;
-    }
+  button {
+    display: block;
+    padding: .2em .4em;
+    margin: .6em auto 1.2em;
+    border: 0;
+    border-radius: 3px;
+    background: transparent;
+  }
 
-    input.number {
-        width: 4em;
-        text-align: right;
-        margin-left: 1em;
-    }
+  input.number {
+    width: 4em;
+    text-align: right;
+    margin-left: 1em;
+  }
 </style>
 
 <Form onSubmit={onSubmit} on:formcancel={resetValues} submittable={!!itemKey}>
-    <SearchableInput bind:value={varenavn} placeholder="Varenavn" selection={$items} />
+  <SearchableInput bind:value={varenavn} placeholder="Varenavn" selection={$items} />
     {#if visMer}
-    <div transition:slide>
+      <div transition:slide>
         <input type="text" bind:value={kommentar} placeholder="Kommentar" />
         <div>
-            Antall
-            <input
-                    type="number"
-                    bind:value={antall}
-                    class="number"
-                    maxlength="3"
-            />
+          Antall
+          <input
+              type="number"
+              bind:value={antall}
+              class="number"
+              maxlength="3"
+          />
         </div>
-    </div>
+      </div>
     {:else}
-    <button on:click={()=>visMer=true} transition:slide>Vis mer</button>
+      <button on:click={()=>visMer=true} transition:slide>Vis mer</button>
     {/if}
 </Form>
