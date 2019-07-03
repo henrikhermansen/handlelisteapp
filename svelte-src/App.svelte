@@ -10,78 +10,78 @@
 </script>
 
 <style>
-    :global(body) {
-        padding: 0;
-        margin: 0;
-        background: #f5f5f5;
-        height: 100vh;
-        position: relative;
-    }
+  :global(body) {
+    padding: 0;
+    margin: 0;
+    background: #f5f5f5;
+    height: 100vh;
+    position: relative;
+  }
 
-    :global(body, input, button) {
-        font-family: "Nunito", Arial, "Helvetica Neue", Helvetica, sans-serif;
-        font-size: 16px;
-    }
+  :global(body, input, button) {
+    font-family: "Nunito", Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 16px;
+  }
 
-    :global(input:focus, button:focus) {
-        outline: none;
-        box-shadow: 0 0 0 1px #ffffff, 0 0 0 3px #e9f9e1 !important;
-    }
+  :global(input:focus, button:focus) {
+    outline: none;
+    box-shadow: 0 0 0 1px #ffffff, 0 0 0 3px #e9f9e1 !important;
+  }
 
-    :global(button:hover),
-    :global(button:focus),
-    :global(input:hover, input:focus) {
-        border-color: #46a020 !important;
-    }
+  :global(button:hover),
+  :global(button:focus),
+  :global(input:hover, input:focus) {
+    border-color: #46a020 !important;
+  }
 
-    .outer {
-        max-width: 768px;
-        margin: 0 auto;
-        height: calc(100vh - 2.5em);
-        position: relative;
-    }
+  .outer {
+    max-width: 768px;
+    margin: 0 auto;
+    height: calc(100vh - 2.5em);
+    position: relative;
+  }
 
-    .outer:after {
-        content: "";
-        position: absolute;
-        z-index: 1;
-        bottom: 0;
-        left: 0;
-        pointer-events: none;
-        background-image: linear-gradient(
-                to bottom,
-                rgba(245, 245, 245, 0),
-                rgba(245, 245, 245, 1) 90%
-        );
-        width: 100%;
-        height: 4em;
-    }
+  .outer:after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+    background-image: linear-gradient(
+        to bottom,
+        rgba(245, 245, 245, 0),
+        rgba(245, 245, 245, 1) 90%
+    );
+    width: 100%;
+    height: 4em;
+  }
 
-    .inner {
-        height: 100%;
-        overflow: scroll;
-    }
+  .inner {
+    height: 100%;
+    overflow: scroll;
+  }
 </style>
 
 {#if view === 'bagItems'}
 <div
-        class="outer"
-        in:fly={{ x: -300, delay: 500, duration: 500, easing: quintInOut }}
-        out:fly={{ x: -300, delay: 0, duration: 500, easing: quintInOut }}
+    class="outer"
+    in:fly={{ x: -300, delay: 500, duration: 500, easing: quintInOut }}
+    out:fly={{ x: -300, delay: 0, duration: 500, easing: quintInOut }}
 >
-    <div class="inner">
-        <BagItems />
-    </div>
+  <div class="inner">
+    <BagItems />
+  </div>
 </div>
 {:else}
 <div
-        class="outer"
-        in:fly={{ x: 300, delay: 500, duration: 500, easing: quintInOut }}
-        out:fly={{ x: 300, delay: 0, duration: 500, easing: quintInOut }}
+    class="outer"
+    in:fly={{ x: 300, delay: 500, duration: 500, easing: quintInOut }}
+    out:fly={{ x: 300, delay: 0, duration: 500, easing: quintInOut }}
 >
-    <div class="inner">
-        Noe andre greier
-    </div>
+  <div class="inner">
+    Noe andre greier
+  </div>
 </div>
 {/if}
 

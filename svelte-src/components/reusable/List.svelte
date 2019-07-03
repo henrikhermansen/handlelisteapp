@@ -2,11 +2,11 @@
 </script>
 
 <style>
-    div {
-        padding-bottom: 2em;
-    }
+  div {
+    padding-bottom: 2em;
+  }
 </style>
 
 <div>
-    <slot></slot>
+  <slot></slot>
 </div>
