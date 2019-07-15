@@ -76,7 +76,6 @@
   div :global(input) {
     width: 100%;
     margin-bottom: .5em;
-    background: var(--some-random-color)
   }
 </style>
 
