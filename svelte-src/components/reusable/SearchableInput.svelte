@@ -3,8 +3,7 @@
   export let placeholder;
   export let selection;
 
-  $: suggestions = Object.entries(selection)
-      .filter(([_, { name }]) => name.toLowerCase().includes(value.toLowerCase()));
+  $: suggestions = selection.filter(([_, { name }]) => name.toLowerCase().includes(value.toLowerCase()));
 
   let inputNode;
   let visibleSelection = false;
@@ -41,7 +40,7 @@
     display: block;
     width: 100%;
     text-align: left;
-    background: #ffffff;
+    background: var(--white);
     border: 0;
     padding: 0 1em;
     cursor: pointer;
@@ -54,7 +53,7 @@
   }
 
   button:hover {
-    background: #e9f9e1;
+    background: var(--cool-green);
     border-color: rgba(0, 0, 0, .1) !important;
   }
 </style>

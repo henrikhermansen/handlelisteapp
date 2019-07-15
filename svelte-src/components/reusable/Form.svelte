@@ -33,7 +33,7 @@
     position: sticky;
     top: 0;
     z-index: 1;
-    background: #ffffff;
+    background: var(--white);
     padding: .5em
   }
 
@@ -58,7 +58,7 @@
 
   button, div :global(input) {
     padding: .3em .6em;
-    border: 2px solid #cccccc;
+    border: 2px solid var(--silver);
     border-radius: 4px;
     background: transparent;
     box-shadow: 0 1px 2px 1px rgba(0, 0, 0, .05);
@@ -70,12 +70,13 @@
   }
 
   .submit.submittable {
-    background: #e9f9e1;
+    background: var(--cool-green);
   }
 
   div :global(input) {
     width: 100%;
     margin-bottom: .5em;
+    background: var(--some-random-color)
   }
 </style>
 

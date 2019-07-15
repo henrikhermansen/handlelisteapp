@@ -13,7 +13,7 @@
   :global(body) {
     padding: 0;
     margin: 0;
-    background: #f5f5f5;
+    background: var(--light-gray);
     height: 100vh;
     position: relative;
   }
@@ -25,13 +25,13 @@
 
   :global(input:focus, button:focus) {
     outline: none;
-    box-shadow: 0 0 0 1px #ffffff, 0 0 0 3px #e9f9e1 !important;
+    box-shadow: 0 0 0 1px var(--white), 0 0 0 3px var(--cool-green) !important;
   }
 
   :global(button:hover),
   :global(button:focus),
   :global(input:hover, input:focus) {
-    border-color: #46a020 !important;
+    border-color: var(--grass) !important;
   }
 
   .outer {
