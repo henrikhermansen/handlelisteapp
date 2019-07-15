@@ -13,6 +13,15 @@
     return item || (name.toLowerCase() === varenavn.toLowerCase() ? key : undefined);
   }, undefined);
 
+  $: sortedItems = Object.entries($items).sort((a, b) => {
+    const aNavn = a[1].name.toLowerCase();
+    const bNavn = b[1].name.toLowerCase();
+    const vNavn = varenavn.toLowerCase();
+    if (aNavn.startsWith(vNavn) && !bNavn.startsWith(vNavn)) return -1;
+    if (bNavn.startsWith(vNavn) && !aNavn.startsWith(vNavn)) return 1;
+    return aNavn.localeCompare(bNavn);
+  });
+
   const resetValues = () => {
     varenavn = '';
     kommentar = '';
@@ -51,7 +60,7 @@
 </style>
 
 <Form onSubmit={onSubmit} on:formcancel={resetValues} submittable={!!itemKey}>
-  <SearchableInput bind:value={varenavn} placeholder="Varenavn" selection={$items} />
+  <SearchableInput bind:value={varenavn} placeholder="Varenavn" selection={sortedItems} />
     {#if visMer}
       <div transition:slide>
         <input type="text" bind:value={kommentar} placeholder="Kommentar" />

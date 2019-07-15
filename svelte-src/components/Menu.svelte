@@ -19,7 +19,7 @@
     align-items: center;
     width: 100vw;
     height: 2.5em;
-    background: #ffffff;
+    background: var(--white);
   }
 
   button {
