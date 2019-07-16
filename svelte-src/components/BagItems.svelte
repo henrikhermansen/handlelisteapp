@@ -1,25 +1,40 @@
 <script>
+  import { crossfade } from 'svelte/transition';
+  import { flip } from 'svelte/animate';
   import { bagItems } from "../stores";
   import BagItem from "./BagItem.svelte";
   import AddBagItem from "./AddBagItem.svelte";
   import List from "./reusable/List.svelte";
 
-  $: bagItemEntries = Object.entries($bagItems).sort(([,{ purchased: ap }], [,{ purchased: bp }]) => {
-    if (!ap && bp) return -1;
-    if (!bp && ap) return 1;
-    return 0;
-  });
+  $: bagItemEntries = Object.entries($bagItems);
+
+  const ikkeKjopt = ([_, { purchased }]) => !purchased;
+  const kjopt = ([_, { purchased }]) => purchased;
+
+  const [send, receive] = crossfade({ duration: d => Math.sqrt(d * 400) });
 </script>
 
 <style>
-  div {
-    padding: 0.5em 0.5em 2em;
-  }
 </style>
 
 <AddBagItem />
 <List>
-    {#each bagItemEntries as [key, bagItem] (key)}
-      <BagItem {key} {bagItem} />
+    {#each bagItemEntries.filter(ikkeKjopt) as [key, bagItem] (key)}
+      <div
+          in:receive={{key}}
+          out:send={{key}}
+          animate:flip={{duration:300}}
+      >
+        <BagItem {key} {bagItem} />
+      </div>
+    {/each}
+    {#each bagItemEntries.filter(kjopt) as [key, bagItem] (key)}
+      <div
+          in:receive={{key}}
+          out:send={{key}}
+          animate:flip={{duration:300}}
+      >
+        <BagItem {key} {bagItem} />
+      </div>
     {/each}
 </List>
