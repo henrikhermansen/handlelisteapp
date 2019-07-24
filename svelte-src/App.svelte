@@ -2,6 +2,7 @@
   import { fly, fade } from 'svelte/transition';
   import { quintInOut } from 'svelte/easing';
   import BagItems from './components/BagItems.svelte';
+  import Items from './components/Items.svelte';
   import Menu from './components/Menu.svelte';
 
   let view = 'bagItems';
@@ -80,7 +81,7 @@
     out:fly={{ x: 300, delay: 0, duration: 500, easing: quintInOut }}
 >
   <div class="inner">
-    Noe andre greier
+    <Items />
   </div>
 </div>
 {/if}
