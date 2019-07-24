@@ -11,7 +11,13 @@
   const ikkeKjopt = ([_, { purchased }]) => !purchased;
   const kjopt = ([_, { purchased }]) => purchased;
 
-  const [send, receive] = crossfade({ duration: d => Math.sqrt(d * 400) });
+  const [send, receive] = crossfade({
+    duration: d => Math.sqrt(d * 400),
+    fallback: () => ({
+      duration: 400,
+      css: t => `opacity: ${t}`
+    })
+  });
 </script>
 
 <style>
