@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { slide } from 'svelte/transition';
-  import Form from './reusable/Form.svelte';
+  import CollapseForm from './reusable/CollapseForm.svelte';
   import SearchableInput from './reusable/SearchableInput.svelte';
   import { items } from '../stores';
   import { add, BAG_ITEMS } from '../api/firebase';
@@ -43,13 +43,14 @@
 </script>
 
 <style>
-  button {
+  button.vis-mer {
     display: block;
     padding: .2em .4em;
     margin: .6em auto 1.2em;
     border: 0;
     border-radius: 3px;
     background: transparent;
+    box-shadow: none;
   }
 
   input.number {
@@ -59,7 +60,7 @@
   }
 </style>
 
-<Form onSubmit={onSubmit} on:formcancel={resetValues} submittable={!!itemKey}>
+<CollapseForm onSubmit={onSubmit} on:formcancel={resetValues} submittable={!!itemKey}>
   <SearchableInput bind:value={varenavn} placeholder="Varenavn" selection={sortedItems} />
     {#if visMer}
       <div transition:slide>
@@ -75,6 +76,6 @@
         </div>
       </div>
     {:else}
-      <button on:click={()=>visMer=true} transition:slide>Vis mer</button>
+      <button class="vis-mer" on:click={()=>visMer=true}>Vis mer</button>
     {/if}
-</Form>
+</CollapseForm>
