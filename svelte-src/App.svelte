@@ -24,6 +24,27 @@
     font-size: 16px;
   }
 
+  :global(button), :global(input) {
+    padding: .3em .6em;
+    border: 2px solid var(--silver);
+    border-radius: 4px;
+    background: transparent;
+  }
+
+  :global(.submit) {
+    background: transparent;
+    transition: background .2s cubic-bezier(.25, .1, .25, 1);
+  }
+
+  :global(.submit.submittable) {
+    background: var(--cool-green);
+  }
+
+  :global(input) {
+    width: 100%;
+    box-shadow: 0 1px 2px 1px rgba(0, 0, 0, .05);
+  }
+
   :global(input:focus, button:focus) {
     outline: none;
     box-shadow: 0 0 0 1px var(--white), 0 0 0 3px var(--cool-green) !important;

@@ -5,6 +5,10 @@
 </script>
 
 <style>
+  .svg :global(svg) {
+    transition: fill .2s ease-in-out;
+  }
+
   .quick-silver :global(svg) {
     fill: var(--quick-silver);
   }
