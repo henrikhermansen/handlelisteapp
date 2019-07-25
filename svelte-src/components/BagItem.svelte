@@ -50,6 +50,11 @@
     stroke-opacity: .4;
     transition: stroke-opacity .1s ease-in;
   }
+
+  .checkmark :global(svg) {
+    width: 24px;
+    height: 24px;
+  }
 </style>
 
 <Flexrow>

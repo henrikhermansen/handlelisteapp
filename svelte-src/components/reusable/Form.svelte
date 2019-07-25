@@ -7,25 +7,11 @@
     margin: 0 0 5px;
   }
 
-  div :global(button), div :global(input) {
-    padding: .3em .6em;
-    border: 2px solid var(--silver);
-    border-radius: 4px;
-    background: transparent;
+  div :global(button) {
     box-shadow: 0 1px 2px 1px rgba(0, 0, 0, .05);
   }
 
-  div :global(.submit) {
-    background: transparent;
-    transition: background .2s cubic-bezier(.25, .1, .25, 1);
-  }
-
-  div :global(.submit.submittable) {
-    background: var(--cool-green);
-  }
-
   div :global(input) {
-    width: 100%;
     margin-bottom: .5em;
   }
 </style>
