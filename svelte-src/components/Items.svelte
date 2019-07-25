@@ -14,7 +14,11 @@
         key,
         {
           ...item,
-          _count: bagItemValues.filter(({ itemKey }) => itemKey === key).length
+          _count: bagItemValues.reduce(
+              (count, { itemKey, quantity }) =>
+                  itemKey === key ? count + (quantity || 1) : count,
+              0
+          )
         }
       ]));
 </script>
