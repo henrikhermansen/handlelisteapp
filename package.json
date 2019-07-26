@@ -19,8 +19,8 @@
     "url": "https://github.com/henrikhermansen/handlelisteapp/"
   },
   "dependencies": {
-    "firebase": "^6.3.1",
-    "svelte": "^3.6.8"
+    "firebase": "^6.3.3",
+    "svelte": "^3.6.9"
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.3",

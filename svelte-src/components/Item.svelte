@@ -1,8 +1,9 @@
 <script>
   import Flexrow from './reusable/Flexrow.svelte';
   import Pencil from './svg/Pencil.svelte';
+  import Cross from './svg/Cross.svelte';
   import { bagItems } from '../stores';
-  import { update, ITEMS } from '../api/firebase';
+  import { update, remove, ITEMS } from '../api/firebase';
 
   export let key;
   export let item;
@@ -11,8 +12,7 @@
 
   $: _count = Object.values($bagItems)
       .reduce(
-          (count, { itemKey, quantity }) =>
-              itemKey === key ? count + (quantity || 1) : count,
+          (count, { itemKey, quantity }) => itemKey === key ? count + (quantity || 1) : count,
           0
       );
 
@@ -25,6 +25,8 @@
     }
     editing = !editing;
   };
+
+  const removeItem = () => remove(ITEMS, key);
 </script>
 
 <style>
@@ -41,11 +43,11 @@
     text-align: right;
   }
 
-  .pencil {
-    padding: 0;
+  .pencil, .remove-item {
+    padding: 0 3px 0 0;
   }
 
-  .pencil button {
+  .pencil button, .remove-item button {
     background: transparent;
     border: 0;
     outline: 0;
@@ -61,7 +63,7 @@
     transition: stroke-opacity .1s ease-in;
   }
 
-  .pencil :global(svg) {
+  .pencil :global(svg), .remove-item :global(svg) {
     width: 24px;
     height: 24px;
   }
@@ -75,7 +77,17 @@
           {item.name}
       {/if}
   </div>
-  <div class="item-quantity">{_count > 0 ? _count : '\xa0'}</div>
+    {#if _count>0}
+      <div class="item-quantity">
+          {_count}
+      </div>
+    {:else}
+      <div class="remove-item">
+        <button on:click={removeItem}>
+          <Cross fill="dark-red" />
+        </button>
+      </div>
+    {/if}
   <div class="pencil">
     <button on:click={editName}>
       <Pencil fill={editing?'grass':'light-gray'} />
