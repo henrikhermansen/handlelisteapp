@@ -6,7 +6,10 @@
   import AddBagItem from "./AddBagItem.svelte";
   import List from "./reusable/List.svelte";
 
-  $: bagItemEntries = Object.entries($bagItems);
+  const todayDateString = new Date().toLocaleDateString();
+  $: bagItemEntries = Object.entries($bagItems)
+          .filter(([_, {purchased}]) =>
+                  !purchased || new Date(purchased).toLocaleDateString() === todayDateString);
 
   const ikkeKjopt = ([_, { purchased }]) => !purchased;
   const kjopt = ([_, { purchased }]) => purchased;
