@@ -2,10 +2,6 @@
 </script>
 
 <style>
-  .list {
-    padding-bottom: 2em;
-  }
-
   .list :global(>div:nth-child(even)) {
     background: var(--gray-white);
   }

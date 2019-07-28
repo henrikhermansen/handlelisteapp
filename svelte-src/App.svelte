@@ -14,7 +14,7 @@
   :global(body) {
     padding: 0;
     margin: 0;
-    background: var(--light-gray);
+    background: var(--white);
     height: 100vh;
     position: relative;
   }
@@ -27,17 +27,8 @@
   :global(button), :global(input) {
     padding: .3em .6em;
     border: 2px solid var(--silver);
-    border-radius: 4px;
+    border-radius: 3px;
     background: transparent;
-  }
-
-  :global(.submit) {
-    background: transparent;
-    transition: background .2s cubic-bezier(.25, .1, .25, 1);
-  }
-
-  :global(.submit.submittable) {
-    background: var(--cool-green);
   }
 
   :global(input) {
@@ -47,36 +38,26 @@
 
   :global(input:focus, button:focus) {
     outline: none;
-    box-shadow: 0 0 0 1px var(--white), 0 0 0 3px var(--cool-green) !important;
+    box-shadow: 0 0 0 1px var(--white), 0 0 0 3px var(--cool-green);
   }
 
   :global(button:hover),
   :global(button:focus),
   :global(input:hover, input:focus) {
-    border-color: var(--grass) !important;
+    border-color: var(--grass);
+  }
+
+  :global(.submit) {
+    transition: background var(--easing-visual);
+  }
+
+  :global(.submit.submittable) {
+    background: var(--cool-green);
   }
 
   .outer {
-    max-width: 768px;
     margin: 0 auto;
     height: calc(100vh - 2.5em);
-    position: relative;
-  }
-
-  .outer:after {
-    content: "";
-    position: absolute;
-    z-index: 1;
-    bottom: 0;
-    left: 0;
-    pointer-events: none;
-    background-image: linear-gradient(
-        to bottom,
-        rgba(245, 245, 245, 0),
-        rgba(245, 245, 245, 1) 90%
-    );
-    width: 100%;
-    height: 4em;
   }
 
   .inner {
@@ -86,25 +67,25 @@
 </style>
 
 {#if view === 'bagItems'}
-<div
-    class="outer"
-    in:fly={{ x: -300, delay: 500, duration: 500, easing: quintInOut }}
-    out:fly={{ x: -300, delay: 0, duration: 500, easing: quintInOut }}
->
-  <div class="inner">
-    <BagItems />
+  <div
+      class="outer"
+      in:fly={{ x: -300, delay: 500, duration: 500, easing: quintInOut }}
+      out:fly={{ x: -300, delay: 0, duration: 500, easing: quintInOut }}
+  >
+    <div class="inner">
+      <BagItems />
+    </div>
   </div>
-</div>
 {:else}
-<div
-    class="outer"
-    in:fly={{ x: 300, delay: 500, duration: 500, easing: quintInOut }}
-    out:fly={{ x: 300, delay: 0, duration: 500, easing: quintInOut }}
->
-  <div class="inner">
-    <Items />
+  <div
+      class="outer"
+      in:fly={{ x: 300, delay: 500, duration: 500, easing: quintInOut }}
+      out:fly={{ x: 300, delay: 0, duration: 500, easing: quintInOut }}
+  >
+    <div class="inner">
+      <Items />
+    </div>
   </div>
-</div>
 {/if}
 
 <Menu on:updateView={updateView} view={view} />
