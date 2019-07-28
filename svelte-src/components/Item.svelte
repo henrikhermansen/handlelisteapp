@@ -60,7 +60,6 @@
   .pencil :global(.svg) {
     stroke: var(--grass);
     stroke-opacity: .4;
-    transition: stroke-opacity .1s ease-in;
   }
 
   .pencil :global(svg), .remove-item :global(svg) {

@@ -6,7 +6,7 @@
 
 <style>
   .svg :global(svg) {
-    transition: fill .2s ease-in-out;
+    transition: fill var(--easing-visual);
   }
 
   .quick-silver :global(svg) {

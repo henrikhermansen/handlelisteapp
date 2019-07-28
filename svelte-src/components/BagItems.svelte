@@ -3,7 +3,6 @@
   import { flip } from 'svelte/animate';
   import { bagItems } from "../stores";
   import BagItem from "./BagItem.svelte";
-  import AddBagItem from "./AddBagItem.svelte";
   import List from "./reusable/List.svelte";
 
   const todayDateString = new Date().toLocaleDateString();
@@ -26,7 +25,6 @@
 <style>
 </style>
 
-<AddBagItem />
 <List>
     {#each bagItemEntries.filter(ikkeKjopt) as [key, bagItem] (key)}
       <div
