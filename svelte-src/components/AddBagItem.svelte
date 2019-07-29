@@ -1,16 +1,20 @@
 <script>
-  import { onMount } from 'svelte';
-  import { slide } from 'svelte/transition';
   import Form from './reusable/Form.svelte';
   import SearchableInput from './reusable/SearchableInput.svelte';
   import { items } from '../stores';
   import { add, BAG_ITEMS } from '../api/firebase';
   import { makeBagItem } from '../util';
-  import ModalHeader from "./reusable/ModalHeader.svelte";
-  import ModalBody from "./reusable/ModalBody.svelte";
-  import ModalFooter from "./reusable/ModalFooter.svelte";
+  import ModalHeader from './reusable/ModalHeader.svelte';
+  import ModalBody from './reusable/ModalBody.svelte';
+  import ModalFooter from './reusable/ModalFooter.svelte';
+  import TemporaryMessage from './reusable/TemporaryMessage.svelte';
 
-  let varenavn = '', kommentar, antall, submitting;
+  let varenavn = '',
+      kommentar = '',
+      antall = 1,
+      submitting = false,
+      temporaryMessage = null,
+      temporaryMessageTheme = null;
 
   $: itemKey = Object.entries($items).reduce((item, [key, { name }]) => {
     return item || (name.toLowerCase() === varenavn.toLowerCase() ? key : undefined);
@@ -35,15 +39,20 @@
   const onSubmit = async () => {
     try {
       submitting = true;
-      const response = await add(BAG_ITEMS, makeBagItem(itemKey, kommentar, antall));
+      await add(BAG_ITEMS, makeBagItem(itemKey, kommentar, antall));
+      temporaryMessage = `${varenavn} ble lagt i handlevognen`;
+      temporaryMessageTheme = 'success';
       resetValues();
-      return response; // Gjøre noe med denne? Vise en success-melding?
     } catch (e) {
-      return Promise.reject(e);
+      temporaryMessage = `Kunne ikke legge ${varenavn} i handlevognen`;
+      temporaryMessageTheme = 'error';
     }
   };
 
-  onMount(resetValues);
+  const resetTemporaryMessage = () => {
+    temporaryMessage = null;
+    temporaryMessageTheme = null;
+  };
 </script>
 
 <style>
@@ -57,21 +66,24 @@
 <ModalHeader>
   Legg til i handlevogn
 </ModalHeader>
+{#if temporaryMessage}
+  <TemporaryMessage closeFn={resetTemporaryMessage} theme={temporaryMessageTheme}>
+      {temporaryMessage}
+  </TemporaryMessage>
+{/if}
 <ModalBody>
   <Form>
     <SearchableInput bind:value={varenavn} placeholder="Varenavn" selection={sortedItems} />
-    <div>
-      <input type="text" bind:value={kommentar} placeholder="Kommentar" />
-      <div>
-        Antall
-        <input
-            type="number"
-            bind:value={antall}
-            class="number"
-            maxlength="3"
-        />
-      </div>
-    </div>
+    <input type="text" bind:value={kommentar} placeholder="Kommentar" />
+    <label>
+      Antall
+      <input
+          type="number"
+          bind:value={antall}
+          class="number"
+          maxlength="3"
+      />
+    </label>
   </Form>
 </ModalBody>
 <ModalFooter>

@@ -1,0 +1,39 @@
+<script>
+  import { onMount } from 'svelte';
+  import { slide } from 'svelte/transition';
+
+  export let closeFn;
+  export let theme;
+  export let timeout = 5000;
+
+  onMount(() => {
+    setTimeout(closeFn, timeout);
+  });
+
+  const cssClass = `temporary-message ${theme}`;
+</script>
+
+<style>
+  .temporary-message {
+    margin: 1em auto 5px;
+    width: calc(100% - 3em);
+    padding: 0.5em;
+    border-radius: 3px;
+  }
+
+  .success {
+    background: var(--cool-green);
+    box-shadow: 0 0 1px 0 var(--grass), 0 0 0 1px var(--cool-green);
+    color: var(--dark-green);
+  }
+
+  .error {
+    background: var(--cool-red);
+    box-shadow: 0 0 1px 0 var(--dark-red), 0 0 0 1px var(--cool-red);
+    color: var(--dark-red);
+  }
+</style>
+
+<div class={cssClass} transition:slide={{ duration: 200 }}>
+  <slot></slot>
+</div>
