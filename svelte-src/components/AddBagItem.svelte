@@ -1,13 +1,16 @@
 <script>
   import { onMount } from 'svelte';
   import { slide } from 'svelte/transition';
-  import CollapseForm from './reusable/CollapseForm.svelte';
+  import Form from './reusable/Form.svelte';
   import SearchableInput from './reusable/SearchableInput.svelte';
   import { items } from '../stores';
   import { add, BAG_ITEMS } from '../api/firebase';
   import { makeBagItem } from '../util';
+  import ModalHeader from "./reusable/ModalHeader.svelte";
+  import ModalBody from "./reusable/ModalBody.svelte";
+  import ModalFooter from "./reusable/ModalFooter.svelte";
 
-  let varenavn = '', kommentar, antall, visMer;
+  let varenavn = '', kommentar, antall, submitting;
 
   $: itemKey = Object.entries($items).reduce((item, [key, { name }]) => {
     return item || (name.toLowerCase() === varenavn.toLowerCase() ? key : undefined);
@@ -26,14 +29,15 @@
     varenavn = '';
     kommentar = '';
     antall = 1;
-    visMer = false;
+    submitting = false;
   };
 
   const onSubmit = async () => {
     try {
+      submitting = true;
       const response = await add(BAG_ITEMS, makeBagItem(itemKey, kommentar, antall));
       resetValues();
-      return response;
+      return response; // Gjøre noe med denne? Vise en success-melding?
     } catch (e) {
       return Promise.reject(e);
     }
@@ -43,16 +47,6 @@
 </script>
 
 <style>
-  button.vis-mer {
-    display: block;
-    padding: .2em .4em;
-    margin: .6em auto 1.2em;
-    border: 0;
-    border-radius: 3px;
-    background: transparent;
-    box-shadow: none;
-  }
-
   input.number {
     width: 4em;
     text-align: right;
@@ -60,22 +54,33 @@
   }
 </style>
 
-<CollapseForm onSubmit={onSubmit} on:formcancel={resetValues} submittable={!!itemKey}>
-  <SearchableInput bind:value={varenavn} placeholder="Varenavn" selection={sortedItems} />
-    {#if visMer}
-      <div transition:slide>
-        <input type="text" bind:value={kommentar} placeholder="Kommentar" />
-        <div>
-          Antall
-          <input
-              type="number"
-              bind:value={antall}
-              class="number"
-              maxlength="3"
-          />
-        </div>
+<ModalHeader>
+  Legg til i handlevogn
+</ModalHeader>
+<ModalBody>
+  <Form>
+    <SearchableInput bind:value={varenavn} placeholder="Varenavn" selection={sortedItems} />
+    <div>
+      <input type="text" bind:value={kommentar} placeholder="Kommentar" />
+      <div>
+        Antall
+        <input
+            type="number"
+            bind:value={antall}
+            class="number"
+            maxlength="3"
+        />
       </div>
-    {:else}
-      <button class="vis-mer" on:click={()=>visMer=true}>Vis mer</button>
-    {/if}
-</CollapseForm>
+    </div>
+  </Form>
+</ModalBody>
+<ModalFooter>
+  <button
+      on:click={onSubmit}
+      class="submit"
+      class:submittable={!!itemKey}
+      disabled={!itemKey || submitting}
+  >
+    Legg til
+  </button>
+</ModalFooter>
