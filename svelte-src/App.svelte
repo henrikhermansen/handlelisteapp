@@ -10,7 +10,7 @@
   import Modal from "./components/reusable/Modal.svelte";
 
   let view = 'bagItems';
-  let modal = AddBagItem;
+  let modal = null;
 
   const updateView = ({ detail }) => view = detail;
   const addItem = () => modal = view === 'bagItems' ? AddBagItem : AddItem;
