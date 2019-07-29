@@ -1,13 +1,20 @@
 <script>
+  import { setContext } from 'svelte';
   import { fly, fade } from 'svelte/transition';
   import { quintInOut } from 'svelte/easing';
   import BagItems from './components/BagItems.svelte';
   import Items from './components/Items.svelte';
   import Menu from './components/Menu.svelte';
+  import AddBagItem from './components/AddBagItem.svelte';
+  import AddItem from './components/AddItem.svelte';
+  import Modal from "./components/reusable/Modal.svelte";
 
   let view = 'bagItems';
+  let modal = AddBagItem;
 
   const updateView = ({ detail }) => view = detail;
+  const addItem = () => modal = view === 'bagItems' ? AddBagItem : AddItem;
+  setContext('closeModal', () => modal = null);
 </script>
 
 <style>
@@ -66,7 +73,11 @@
   }
 </style>
 
-{#if view === 'bagItems'}
+{#if !!modal}
+  <Modal Component={modal} />
+{/if}
+
+{#if view==='bagItems'}
   <div
       class="outer"
       in:fly={{ x: -300, delay: 500, duration: 500, easing: quintInOut }}
@@ -88,4 +99,9 @@
   </div>
 {/if}
 
-<Menu on:updateView={updateView} view={view} />
+<Menu
+    on:updateView={updateView}
+    view={view}
+    on:addItem={addItem}
+    addItemActive={!!modal}
+/>

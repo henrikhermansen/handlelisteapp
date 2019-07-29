@@ -5,11 +5,13 @@
   import Plus from "./svg/Plus.svelte";
 
   export let view;
+  export let addItemActive;
 
   const dispatch = createEventDispatcher();
 
   const showHandleliste = () => dispatch('updateView', 'bagItems');
   const showVareutvalg = () => dispatch('updateView', 'items');
+  const addItem = () => dispatch('addItem');
 </script>
 
 <style>
@@ -38,7 +40,7 @@
   button:hover,
   button:focus {
     background: var(--dark-green);
-    transition: background var(--easing-visual);
+    transition: background var(--easing-visual), opacity var(--easing-visual);
     opacity: .85;
   }
 
@@ -64,7 +66,7 @@
     <Selection fill="white" />
   </button>
   <div class="stretch" />
-  <button>
+  <button on:click={addItem} class:active={addItemActive}>
     <Plus fill="white" />
   </button>
 </div>

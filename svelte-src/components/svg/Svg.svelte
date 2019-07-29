@@ -6,7 +6,7 @@
 
 <style>
   .svg :global(svg) {
-    transition: fill var(--easing-visual);
+    transition: fill var(--easing-visual), opacity var(--easing-visual);
   }
 
   .quick-silver :global(svg) {
@@ -17,6 +17,9 @@
   }
   .light-gray :global(svg) {
     fill: var(--light-gray);
+  }
+  .gray-white :global(svg) {
+    fill: var(--gray-white);
   }
   .grass :global(svg) {
     fill: var(--grass);
@@ -35,6 +38,9 @@
   }
   .dark-red :global(svg) {
     fill: var(--dark-red);
+  }
+  .charcoal :global(svg) {
+    fill: var(--charcoal);
   }
 </style>
 

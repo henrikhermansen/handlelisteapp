@@ -2,15 +2,12 @@
 </script>
 
 <style>
-  div {
-    position: sticky;
-    top: 0;
-    z-index: 1;
+  .modal__body {
     background: var(--white);
-    padding: .5em
+    padding: 1em;
   }
 </style>
 
-<div>
+<div class="modal__body">
   <slot></slot>
 </div>
