@@ -39,6 +39,9 @@
   .dark-red :global(svg) {
     fill: var(--dark-red);
   }
+  .cool-red :global(svg) {
+    fill: var(--cool-red);
+  }
   .charcoal :global(svg) {
     fill: var(--charcoal);
   }
