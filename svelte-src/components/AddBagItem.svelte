@@ -33,7 +33,6 @@
     varenavn = '';
     kommentar = '';
     antall = 1;
-    submitting = false;
   };
 
   const onSubmit = async () => {
@@ -46,6 +45,8 @@
     } catch (e) {
       temporaryMessage = `Kunne ikke legge ${varenavn} i handlevognen`;
       temporaryMessageTheme = 'error';
+    } finally {
+      submitting = false;
     }
   };
 
@@ -66,12 +67,12 @@
 <ModalHeader>
   Legg til i handlevogn
 </ModalHeader>
-{#if temporaryMessage}
-  <TemporaryMessage closeFn={resetTemporaryMessage} theme={temporaryMessageTheme}>
-      {temporaryMessage}
-  </TemporaryMessage>
-{/if}
 <ModalBody>
+    {#if temporaryMessage}
+      <TemporaryMessage closeFn={resetTemporaryMessage} theme={temporaryMessageTheme}>
+          {temporaryMessage}
+      </TemporaryMessage>
+    {/if}
   <Form>
     <SearchableInput bind:value={varenavn} placeholder="Varenavn" selection={sortedItems} />
     <input type="text" bind:value={kommentar} placeholder="Kommentar" />

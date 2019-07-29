@@ -15,8 +15,9 @@
 
 <style>
   .temporary-message {
-    margin: 1em auto 5px;
-    width: calc(100% - 3em);
+    margin: 0 auto 1em;
+    box-sizing: border-box;
+    width: calc(100% - 2px);
     padding: 0.5em;
     border-radius: 3px;
   }

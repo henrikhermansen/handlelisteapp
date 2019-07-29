@@ -2,7 +2,6 @@
   import { crossfade } from 'svelte/transition';
   import { flip } from 'svelte/animate';
   import { quintOut } from 'svelte/easing';
-  import AddItem from './AddItem.svelte';
   import List from './reusable/List.svelte';
   import Item from './Item.svelte';
   import { items } from '../stores';
@@ -60,7 +59,6 @@
   }
 </style>
 
-<AddItem />
 <div class="filters">
     {#each filterableCharacters as character}
       <button

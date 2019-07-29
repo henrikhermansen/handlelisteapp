@@ -1,16 +1,21 @@
 <script>
-  import { onMount } from 'svelte';
-  import { slide } from 'svelte/transition';
   import Form from './reusable/Form.svelte';
   import { items } from '../stores';
   import { add, ITEMS } from '../api/firebase';
   import { makeItem } from '../util';
+  import ModalHeader from "./reusable/ModalHeader.svelte";
+  import ModalBody from "./reusable/ModalBody.svelte";
+  import ModalFooter from "./reusable/ModalFooter.svelte";
+  import TemporaryMessage from "./reusable/TemporaryMessage.svelte";
 
-  let varenavn = '', submitting = false;
+  let varenavn = '',
+      submitting = false,
+      temporaryMessage = null,
+      temporaryMessageTheme = null;
 
   $: lowerCaseItemNames = Object.values($items).map(({ name }) => name.toLowerCase());
   $: varenavnEksisterer = lowerCaseItemNames.includes(varenavn.trim().toLowerCase());
-  $: submittable = varenavn.trim().length > 1 && !varenavnEksisterer;
+  $: submittable = !!varenavn.trim() && !varenavnEksisterer;
 
   const resetValues = () => {
     varenavn = '';
@@ -19,53 +24,53 @@
   const onSubmit = async () => {
     try {
       submitting = true;
-      const response = await add(ITEMS, makeItem(varenavn));
+      await add(ITEMS, makeItem(varenavn));
+      temporaryMessage = `${varenavn} ble lagt til i vareutvalget`;
+      temporaryMessageTheme = 'success';
       resetValues();
-      return response;
     } catch (e) {
-      return Promise.reject(e);
+      temporaryMessage = `Kunne ikke legge til ${varenavn} i vareutvalget`;
+      temporaryMessageTheme = 'error';
     } finally {
       submitting = false;
     }
   };
 
-  onMount(resetValues);
+  const resetTemporaryMessage = () => {
+    temporaryMessage = null;
+    temporaryMessageTheme = null;
+  };
 </script>
 
 <style>
-  .item-form {
-    display: flex;
-    justify-content: flex-start;
-    width: 100%;
-  }
-
   .feilmelding {
     color: var(--dark-red);
   }
-
-  button {
-    flex-basis: 7em;
-    margin: 0 0 .5em .5em;
-  }
-
-  input {
-    flex-grow: 2;
-  }
 </style>
 
-<Form>
-  <div class="item-form">
+<ModalHeader>
+  Legg til i vareutvalg
+</ModalHeader>
+<ModalBody>
+  {#if temporaryMessage}
+    <TemporaryMessage closeFn={resetTemporaryMessage} theme={temporaryMessageTheme}>
+      {temporaryMessage}
+    </TemporaryMessage>
+  {/if}
+  <Form>
     <input type="text" bind:value={varenavn} placeholder="Varenavn" />
-    <button
-        on:click={onSubmit}
-        class="submit"
-        class:submittable
-        disabled={!submittable}
-    >
-      Legg til
-    </button>
-  </div>
-    {#if varenavnEksisterer && !submitting}
-      <div class="feilmelding">Varenavnet eksisterer allerede</div>
-    {/if}
-</Form>
+      {#if varenavnEksisterer && !submitting}
+        <div class="feilmelding">Varenavnet eksisterer allerede</div>
+      {/if}
+  </Form>
+</ModalBody>
+<ModalFooter>
+  <button
+      on:click={onSubmit}
+      class="submit"
+      class:submittable
+      disabled={!submittable || submitting}
+  >
+    Legg til
+  </button>
+</ModalFooter>
