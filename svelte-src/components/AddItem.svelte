@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from 'svelte';
   import Form from './reusable/Form.svelte';
   import { items } from '../stores';
   import { add, ITEMS } from '../api/firebase';
@@ -11,7 +12,8 @@
   let varenavn = '',
       submitting = false,
       temporaryMessage = null,
-      temporaryMessageTheme = null;
+      temporaryMessageTheme = null,
+      inputNode;
 
   $: lowerCaseItemNames = Object.values($items).map(({ name }) => name.toLowerCase());
   $: varenavnEksisterer = lowerCaseItemNames.includes(varenavn.trim().toLowerCase());
@@ -40,6 +42,10 @@
     temporaryMessage = null;
     temporaryMessageTheme = null;
   };
+
+  onMount(() => {
+    inputNode.focus();
+  });
 </script>
 
 <style>
@@ -52,13 +58,13 @@
   Legg til i vareutvalg
 </ModalHeader>
 <ModalBody>
-  {#if temporaryMessage}
-    <TemporaryMessage closeFn={resetTemporaryMessage} theme={temporaryMessageTheme}>
-      {temporaryMessage}
-    </TemporaryMessage>
-  {/if}
+    {#if temporaryMessage}
+      <TemporaryMessage closeFn={resetTemporaryMessage} theme={temporaryMessageTheme}>
+          {temporaryMessage}
+      </TemporaryMessage>
+    {/if}
   <Form>
-    <input type="text" bind:value={varenavn} placeholder="Varenavn" />
+    <input type="text" bind:value={varenavn} bind:this={inputNode} placeholder="Varenavn" />
       {#if varenavnEksisterer && !submitting}
         <div class="feilmelding">Varenavnet eksisterer allerede</div>
       {/if}

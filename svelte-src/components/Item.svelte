@@ -1,4 +1,5 @@
 <script>
+  import { afterUpdate } from 'svelte';
   import Flexrow from './reusable/Flexrow.svelte';
   import Pencil from './svg/Pencil.svelte';
   import Cross from './svg/Cross.svelte';
@@ -8,7 +9,7 @@
   export let item;
   export let count;
 
-  let editing = false, newItemName = item.name;
+  let editing = false, newItemName = item.name, inputNode;
 
   const editName = async () => {
     if (editing) {
@@ -21,6 +22,12 @@
   };
 
   const removeItem = () => remove(ITEMS, key);
+
+  afterUpdate(() => {
+    if (editing) {
+      inputNode.focus();
+    }
+  });
 </script>
 
 <style>
@@ -69,7 +76,7 @@
 <Flexrow>
   <div class="item-name">
       {#if editing}
-        <input type="text" bind:value={newItemName} placeholder="Nytt varenavn" />
+        <input type="text" bind:value={newItemName} bind:this={inputNode} placeholder="Nytt varenavn" />
       {:else}
           {item.name}
       {/if}

@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from 'svelte';
   import Form from './reusable/Form.svelte';
   import SearchableInput from './reusable/SearchableInput.svelte';
   import { items } from '../stores';
@@ -14,7 +15,8 @@
       antall = 1,
       submitting = false,
       temporaryMessage = null,
-      temporaryMessageTheme = null;
+      temporaryMessageTheme = null,
+      inputNode;
 
   $: itemKey = Object.entries($items).reduce((item, [key, { name }]) => {
     return item || (name.toLowerCase() === varenavn.toLowerCase() ? key : undefined);
@@ -54,6 +56,10 @@
     temporaryMessage = null;
     temporaryMessageTheme = null;
   };
+
+  onMount(() => {
+    inputNode.$$.ctx.inputNode.focus();
+  });
 </script>
 
 <style>
@@ -74,7 +80,7 @@
       </TemporaryMessage>
     {/if}
   <Form>
-    <SearchableInput bind:value={varenavn} placeholder="Varenavn" selection={sortedItems} />
+    <SearchableInput bind:value={varenavn} bind:this={inputNode} placeholder="Varenavn" selection={sortedItems} />
     <input type="text" bind:value={kommentar} placeholder="Kommentar" />
     <label>
       Antall
