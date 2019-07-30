@@ -2,19 +2,13 @@
   import Flexrow from './reusable/Flexrow.svelte';
   import Pencil from './svg/Pencil.svelte';
   import Cross from './svg/Cross.svelte';
-  import { bagItems } from '../stores';
   import { update, remove, ITEMS } from '../api/firebase';
 
   export let key;
   export let item;
+  export let count;
 
   let editing = false, newItemName = item.name;
-
-  $: _count = Object.values($bagItems)
-      .reduce(
-          (count, { itemKey, quantity }) => itemKey === key ? count + (quantity || 1) : count,
-          0
-      );
 
   const editName = async () => {
     if (editing) {
@@ -38,12 +32,16 @@
     flex-grow: 2;
   }
 
-  .item-quantity {
+  .item-quantity, .remove-item {
     flex-basis: 3em;
     text-align: right;
   }
 
-  .pencil, .remove-item {
+  .remove-item {
+    padding: 0 3px 0 1em;
+  }
+
+  .pencil {
     padding: 0 3px 0 0;
   }
 
@@ -76,9 +74,9 @@
           {item.name}
       {/if}
   </div>
-    {#if _count>0}
+    {#if count>0}
       <div class="item-quantity">
-          {_count}
+          {count}
       </div>
     {:else}
       <div class="remove-item">
