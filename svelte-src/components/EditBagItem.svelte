@@ -1,18 +1,20 @@
 <script>
-  import { onMount } from 'svelte';
   import Form from './reusable/Form.svelte';
   import SearchableInput from './reusable/SearchableInput.svelte';
   import { items } from '../stores';
-  import { add, BAG_ITEMS } from '../api/firebase';
+  import { update, remove, BAG_ITEMS } from '../api/firebase';
   import { makeBagItem, findItemKey, sortItems } from '../util';
   import ModalHeader from './reusable/ModalHeader.svelte';
   import ModalBody from './reusable/ModalBody.svelte';
   import ModalFooter from './reusable/ModalFooter.svelte';
   import TemporaryMessage from './reusable/TemporaryMessage.svelte';
 
-  let varenavn = '',
-      kommentar = '',
-      antall = 1,
+  export let key;
+  export let bagItem;
+
+  let varenavn = $items[bagItem.itemKey].name,
+      kommentar = bagItem.comment || '',
+      antall = bagItem.quantity || 1,
       submitting = false,
       temporaryMessage = null,
       temporaryMessageTheme = null,
@@ -22,36 +24,27 @@
 
   $: sortedItems = sortItems($items, varenavn);
 
-  const resetValues = () => {
-    varenavn = '';
-    kommentar = '';
-    antall = 1;
-  };
-
   const onSubmit = async () => {
     try {
       resetTemporaryMessage();
       submitting = true;
-      await add(BAG_ITEMS, makeBagItem(itemKey, kommentar, antall));
-      temporaryMessage = `${varenavn} ble lagt i handlevognen`;
+      await update(BAG_ITEMS, key, makeBagItem(itemKey, kommentar, antall, bagItem.added));
+      temporaryMessage = `${varenavn} ble oppdatert`;
       temporaryMessageTheme = 'success';
-      resetValues();
     } catch (e) {
-      temporaryMessage = `Kunne ikke legge ${varenavn} i handlevognen`;
+      temporaryMessage = `Kunne ikke oppdatere ${varenavn}`;
       temporaryMessageTheme = 'error';
     } finally {
       submitting = false;
     }
   };
 
+  const onRemove = () => remove(BAG_ITEMS, key);
+
   const resetTemporaryMessage = () => {
     temporaryMessage = null;
     temporaryMessageTheme = null;
   };
-
-  onMount(() => {
-    inputNode.$$.ctx.inputNode.focus();
-  });
 </script>
 
 <style>
@@ -60,10 +53,24 @@
     text-align: right;
     margin-left: 1em;
   }
+
+  .remove {
+    float: right;
+    background: var(--cool-red);
+  }
+
+  .remove:hover,
+  .remove:focus {
+    border-color: var(--dark-red);
+  }
+
+  .remove:focus {
+    box-shadow: 0 0 0 1px var(--white), 0 0 0 3px var(--cool-red);
+  }
 </style>
 
 <ModalHeader>
-  Legg til i handlevogn
+  Endre vare i handlevogn
 </ModalHeader>
 <ModalBody>
     {#if temporaryMessage}
@@ -92,6 +99,7 @@
       class:submittable={!!itemKey}
       disabled={!itemKey || submitting}
   >
-    Legg til
+    Endre
   </button>
+  <button class="remove" on:click={onRemove}>Slett</button>
 </ModalFooter>
