@@ -4,9 +4,11 @@
   import Cross from "../svg/Cross.svelte";
 
   export let Component;
-  let modalCloseHover = false;
+  let isHoveringCloseButton = false;
 
   const closeModal = getContext('closeModal');
+
+  const { Component: c, ...forwardProps } = $$props;
 </script>
 
 <style>
@@ -68,9 +70,14 @@
       out:fly={{ duration: 300, y: -50 }}
       on:click="{e=>e.stopPropagation()}"
   >
-    <button class="modal__close" on:click={closeModal} on:mouseover="{()=>modalCloseHover=true}" on:mouseout="{()=>modalCloseHover=false}">
+    <button
+        class="modal__close"
+        on:click={closeModal}
+        on:mouseover="{()=>isHoveringCloseButton=true}"
+        on:mouseout="{()=>isHoveringCloseButton=false}"
+    >
       <Cross fill="charcoal" />
     </button>
-    <Component />
+    <Component {...forwardProps} />
   </div>
 </div>

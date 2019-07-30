@@ -1,16 +1,25 @@
 <script>
+  import { setContext } from 'svelte';
   import Flexrow from './reusable/Flexrow.svelte';
   import Checkmark from './svg/Checkmark.svelte';
   import { items } from '../stores';
   import { update, BAG_ITEMS } from '../api/firebase';
+  import Modal from './reusable/Modal.svelte';
+  import EditBagItem from './EditBagItem.svelte';
 
   export let key;
   export let bagItem;
+
+  let longPressTimer, edit = false;
 
   const togglePurchasedStatus = () => update(BAG_ITEMS, key, {
     ...bagItem,
     purchased: bagItem.purchased ? false : new Date().toJSON(),
   });
+
+  const startLongPressTimer = () => longPressTimer = setTimeout(() => edit = true, 700);
+  const endLongPressTimer = () => clearTimeout(longPressTimer);
+  setContext('closeModal', () => edit = false);
 </script>
 
 <style>
@@ -59,6 +68,9 @@
   }
 </style>
 
+{#if edit}
+  <Modal Component={EditBagItem} {key} {bagItem} />
+{/if}
 <Flexrow>
   <div class="item-name">
       {$items[bagItem.itemKey].name}
@@ -68,7 +80,11 @@
   </div>
   <div class="item-quantity">{bagItem.quantity > 1 ? bagItem.quantity : '\xa0'}</div>
   <div class="checkmark">
-    <button on:click={togglePurchasedStatus}>
+    <button
+        on:click={togglePurchasedStatus}
+        on:mousedown={startLongPressTimer}
+        on:mouseup={endLongPressTimer}
+    >
       <Checkmark fill={bagItem.purchased?'grass':'light-gray'} />
     </button>
   </div>

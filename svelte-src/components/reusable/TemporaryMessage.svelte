@@ -1,14 +1,21 @@
 <script>
-  import { onMount } from 'svelte';
+  import { onDestroy, beforeUpdate, afterUpdate } from 'svelte';
   import { slide } from 'svelte/transition';
 
   export let closeFn;
   export let theme;
   export let timeout = 5000;
 
-  onMount(() => {
-    setTimeout(closeFn, timeout);
-  });
+  let timer;
+  const setTimer = () => timer = setTimeout(closeFn, timeout);
+  const clearTimer = () => {
+    clearTimeout(timer);
+    timer = null;
+  };
+
+  afterUpdate(setTimer);
+  onDestroy(clearTimer);
+  beforeUpdate(clearTimer);
 
   const cssClass = `temporary-message ${theme}`;
 </script>
