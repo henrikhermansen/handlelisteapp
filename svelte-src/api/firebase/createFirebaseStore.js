@@ -11,7 +11,7 @@ const createFirebaseStore = ref => {
 
   const subscribe = cb => {
     try {
-      cb(JSON.parse(localStorage.getItem(`handleliste-${ref}`)));
+      cb(JSON.parse(localStorage.getItem(`handleliste-${ref}`)) || {});
     } catch {
       cb({});
     }
