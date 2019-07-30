@@ -20,15 +20,18 @@
 
   .item-name {
     flex-grow: 2;
+    padding-right: 0;
   }
 
   .item-name small {
     margin-left: 1em;
+    display: block;
   }
 
   .item-quantity {
     flex-basis: 3em;
     text-align: right;
+    padding-left: .5em;
   }
 
   .checkmark {
@@ -60,7 +63,6 @@
   <div class="item-name">
       {$items[bagItem.itemKey].name}
       {#if bagItem.comment}
-        <br />
         <small>{bagItem.comment}</small>
       {/if}
   </div>
