@@ -9,6 +9,7 @@
   import ModalBody from './reusable/ModalBody.svelte';
   import ModalFooter from './reusable/ModalFooter.svelte';
   import TemporaryMessage from './reusable/TemporaryMessage.svelte';
+  import ModalFooterFormButtons from "./reusable/ModalFooterFormButtons.svelte";
 
   let varenavn = '',
       kommentar = '',
@@ -86,12 +87,14 @@
   </Form>
 </ModalBody>
 <ModalFooter>
-  <button
-      on:click={onSubmit}
-      class="submit"
-      class:submittable={!!itemKey}
-      disabled={!itemKey || submitting}
-  >
-    Legg til
-  </button>
+  <ModalFooterFormButtons>
+    <button
+        on:click={onSubmit}
+        class="submit"
+        class:submittable={!!itemKey}
+        disabled={!itemKey || submitting}
+    >
+      Legg til
+    </button>
+  </ModalFooterFormButtons>
 </ModalFooter>
