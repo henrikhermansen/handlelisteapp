@@ -10,21 +10,19 @@
   "scripts": {
     "build": "rimraf dist/* && parcel build public/index.html",
     "start": "parcel public/index.html --no-cache --no-hmr",
-    "test": "",
-    "postinstall": "node clean-svelte.js",
-    "postupgrade": "node clean-svelte.js"
+    "test": ""
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/henrikhermansen/handlelisteapp/"
   },
   "dependencies": {
-    "firebase": "^6.3.3",
-    "svelte": "^3.6.9"
+    "firebase": "^6.3.5",
+    "svelte": "^3.7.1"
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.3",
-    "parcel-plugin-svelte": "^3.0.1",
+    "parcel-plugin-svelte": "^4.0.1",
     "pre-commit": "^1.2.2",
     "rimraf": "^2.6.3"
   },
