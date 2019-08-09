@@ -8,6 +8,7 @@
   import ModalBody from './reusable/ModalBody.svelte';
   import ModalFooter from './reusable/ModalFooter.svelte';
   import TemporaryMessage from './reusable/TemporaryMessage.svelte';
+  import ModalFooterFormButtons from "./reusable/ModalFooterFormButtons.svelte";
 
   export let key;
   export let bagItem;
@@ -55,7 +56,6 @@
   }
 
   .remove {
-    float: right;
     background: var(--cool-red);
   }
 
@@ -93,13 +93,15 @@
   </Form>
 </ModalBody>
 <ModalFooter>
-  <button
-      on:click={onSubmit}
-      class="submit"
-      class:submittable={!!itemKey}
-      disabled={!itemKey || submitting}
-  >
-    Endre
-  </button>
-  <button class="remove" on:click={onRemove}>Slett</button>
+  <ModalFooterFormButtons>
+    <button
+        on:click={onSubmit}
+        class="submit"
+        class:submittable={!!itemKey}
+        disabled={!itemKey || submitting}
+    >
+      Endre
+    </button>
+    <button class="remove" on:click={onRemove}>Slett</button>
+  </ModalFooterFormButtons>
 </ModalFooter>
