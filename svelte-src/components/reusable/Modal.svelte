@@ -26,7 +26,8 @@
     background: rgba(50, 50, 50, .6);
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    padding-top: 50px;
   }
 
   .modal {

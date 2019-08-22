@@ -22,8 +22,6 @@
     padding: 0;
     margin: 0;
     background: var(--white);
-    height: 100vh;
-    position: relative;
   }
 
   :global(body, input, button) {
