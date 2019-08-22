@@ -9,15 +9,16 @@
 
   export let key;
   export let bagItem;
+  const { purchased } = bagItem;
 
   let longPressTimer, edit = false;
 
   const togglePurchasedStatus = () => update(BAG_ITEMS, key, {
     ...bagItem,
-    purchased: bagItem.purchased ? false : new Date().toJSON(),
+    purchased: purchased ? false : new Date().toJSON(),
   });
 
-  const startLongPressTimer = () => longPressTimer = setTimeout(() => edit = true, 700);
+  const startLongPressTimer = () => longPressTimer = setTimeout(() => edit = true, 500);
   const endLongPressTimer = () => clearTimeout(longPressTimer);
   setContext('closeModal', () => edit = false);
 </script>
@@ -30,6 +31,11 @@
   .item-name {
     flex-grow: 2;
     padding-right: 0;
+  }
+
+  .purchased {
+    text-decoration: line-through;
+    color: var(--quick-silver);
   }
 
   .item-name small {
@@ -72,7 +78,7 @@
   <Modal Component={EditBagItem} {key} {bagItem} />
 {/if}
 <Flexrow>
-  <div class="item-name">
+  <div class="item-name" class:purchased>
       {$items[bagItem.itemKey].name}
       {#if bagItem.comment}
         <small>{bagItem.comment}</small>
@@ -84,8 +90,10 @@
         on:click={togglePurchasedStatus}
         on:mousedown={startLongPressTimer}
         on:mouseup={endLongPressTimer}
+        on:touchstart={startLongPressTimer}
+        on:touchend={endLongPressTimer}
     >
-      <Checkmark fill={bagItem.purchased?'grass':'light-gray'} />
+      <Checkmark fill={purchased?'grass':'light-gray'} />
     </button>
   </div>
 </Flexrow>
