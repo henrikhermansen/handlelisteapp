@@ -2,12 +2,16 @@
 </script>
 
 <style>
+  .list :global(>div) {
+    transition: background-color .3s ease-out;
+  }
+
   .list :global(>div:nth-child(even)) {
-    background: var(--gray-white);
+    background-color: var(--gray-white);
   }
 
   .list :global(>div:nth-child(odd)) {
-    background: var(--light-gray);
+    background-color: var(--light-gray);
   }
 </style>
 
