@@ -2,7 +2,7 @@
   import { afterUpdate } from 'svelte';
   import Flexrow from './reusable/Flexrow.svelte';
   import Pencil from './svg/Pencil.svelte';
-  import Cross from './svg/Cross.svelte';
+  import Trashcan from './svg/Trashcan.svelte';
   import { update, remove, ITEMS } from '../api/firebase';
 
   export let key;
@@ -62,11 +62,6 @@
     cursor: pointer;
   }
 
-  .pencil :global(.svg) {
-    stroke: var(--grass);
-    stroke-opacity: .4;
-  }
-
   .pencil :global(svg), .remove-item :global(svg) {
     width: 24px;
     height: 24px;
@@ -88,13 +83,13 @@
     {:else}
       <div class="remove-item">
         <button on:click={removeItem}>
-          <Cross fill="dark-red" />
+          <Trashcan fill="dark-red" />
         </button>
       </div>
     {/if}
   <div class="pencil">
     <button on:click={editName}>
-      <Pencil fill={editing?'grass':'light-gray'} />
+      <Pencil fill={editing?'dark-green':'grass'} />
     </button>
   </div>
 </Flexrow>

@@ -47,6 +47,6 @@
   }
 </style>
 
-<div class={cssClass}>
+<span class={cssClass}>
   <slot></slot>
-</div>
+</span>

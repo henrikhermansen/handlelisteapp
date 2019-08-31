@@ -1,8 +1,11 @@
 <script>
   import { createEventDispatcher } from 'svelte';
+  import { fly } from 'svelte/transition';
   import Cart from './svg/Cart.svelte';
   import Selection from './svg/Selection.svelte';
   import Plus from "./svg/Plus.svelte";
+  import { connected } from '../stores';
+  import Nocloud from "./svg/Nocloud.svelte";
 
   export let view;
   export let addItemActive;
@@ -28,23 +31,25 @@
     background: var(--grass);
   }
 
-  button {
+  .menu-item {
     padding: 0 1.5em;
     margin: 0 .2em;
     height: 3em;
     background: transparent;
     border: 0;
     box-shadow: none;
+    display: flex;
+    align-items: center;
   }
 
-  button:hover,
-  button:focus {
+  button.menu-item:hover,
+  button.menu-item:focus {
     background: var(--dark-green);
     transition: background var(--easing-visual), opacity var(--easing-visual);
     opacity: .85;
   }
 
-  button :global(svg) {
+  .menu-item :global(svg) {
     width: 1.5em;
     height: 1.5em;
   }
@@ -59,14 +64,20 @@
 </style>
 
 <div class="menu">
-  <button on:click={showHandleliste} class:active={view==='bagItems'}>
+  <button on:click={showHandleliste} class="menu-item" class:active={view==='bagItems'}>
     <Cart fill="white" />
   </button>
-  <button on:click={showVareutvalg} class:active={view==='items'}>
+  <button on:click={showVareutvalg} class="menu-item" class:active={view==='items'}>
     <Selection fill="white" />
   </button>
   <div class="stretch" />
-  <button on:click={addItem} class:active={addItemActive}>
+  {#if !$connected}
+    <span class="menu-item" transition:fly="{{ y: 50, duration: 500 }}">
+      <Nocloud fill="dark-red" />
+    </span>
+  {/if}
+  <div class="stretch" />
+  <button on:click={addItem} class="menu-item" class:active={addItemActive}>
     <Plus fill="white" />
   </button>
 </div>
