@@ -5,7 +5,7 @@
 
   $: suggestions = selection.filter(([_, { name }]) => name.toLowerCase().includes(value.toLowerCase()));
 
-  let inputNode;
+  export let inputNode = null;
   let visibleSelection = false;
   const showSelection = () => {
     visibleSelection = true;

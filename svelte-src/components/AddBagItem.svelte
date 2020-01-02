@@ -13,7 +13,7 @@
 
   let varenavn = '',
       kommentar = '',
-      antall = 1,
+      antall = '',
       submitting = false,
       temporaryMessage = null,
       temporaryMessageTheme = null,
@@ -26,7 +26,7 @@
   const resetValues = () => {
     varenavn = '';
     kommentar = '';
-    antall = 1;
+    antall = '';
   };
 
   const onSubmit = async () => {
@@ -51,7 +51,7 @@
   };
 
   onMount(() => {
-    inputNode.$$.ctx.inputNode.focus();
+    inputNode.focus();
   });
 </script>
 
@@ -73,7 +73,7 @@
       </TemporaryMessage>
     {/if}
   <Form>
-    <SearchableInput bind:value={varenavn} bind:this={inputNode} placeholder="Varenavn" selection={sortedItems} />
+    <SearchableInput bind:value={varenavn} bind:inputNode placeholder="Varenavn" selection={sortedItems} />
     <input type="text" bind:value={kommentar} placeholder="Kommentar" />
     <label>
       Antall
@@ -82,6 +82,7 @@
           bind:value={antall}
           class="number"
           maxlength="3"
+          placeholder="1"
       />
     </label>
   </Form>
