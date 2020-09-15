@@ -18,14 +18,14 @@
     "url": "https://github.com/henrikhermansen/handlelisteapp/"
   },
   "dependencies": {
-    "firebase": "^7.6.1",
-    "svelte": "^3.16.7"
+    "firebase": "^7.20.0",
+    "svelte": "^3.25.1"
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.4",
-    "parcel-plugin-svelte": "^4.0.5",
+    "parcel-plugin-svelte": "^4.0.6",
     "pre-commit": "^1.2.2",
-    "rimraf": "^3.0.0"
+    "rimraf": "^3.0.2"
   },
   "browserslist": [
     "last 1 chrome versions"
