@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "firebase": "^7.20.0",
-    "svelte": "^3.25.1"
+    "svelte": "^3.49.0"
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.4",
